@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px 40px;
+  background-color: var(--color-primary);
+  color: white;
+
+  .logo-app {
+    span {
+      color: #243642;
+    }
+  }
+
+  .menu-item {
+    font-size: 18px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0;
+  }
+}

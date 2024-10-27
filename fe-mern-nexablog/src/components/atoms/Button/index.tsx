@@ -1,7 +1,7 @@
 import "./button.scss";
 
 type ButtonProps = {
-  title: string;
+  title?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({ title, ...rest }: ButtonProps) => {
