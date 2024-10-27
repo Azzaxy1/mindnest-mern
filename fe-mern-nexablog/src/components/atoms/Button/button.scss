@@ -8,4 +8,9 @@
   border: none;
   box-sizing: border-box;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3ms ease;
+}
+.button:hover {
+  background-color: var(--color-primary-hover);
 }

@@ -27,9 +27,9 @@ const Register = () => {
           placeholder="Password"
           type="password"
         />
-        <Gap height={30} />
+        <Gap height={20} />
         <Button title="Register" />
-        <Gap height={60} />
+        <Gap height={25} />
         <p className="link">
           Sudah punya akun?{" "}
           <Link to="/login" className="redirect">
