@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "../../molecules";
+import { Footer, Header } from "../../molecules";
+import "./main-layout.scss";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="main-app-wrapper">
       <Header />
-      <Outlet />
-      <p>Footer</p>
+      <div className="content-wrapper">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
   );
 };
