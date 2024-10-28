@@ -6,11 +6,9 @@ type ButtonProps = {
 
 const Button = ({ title, ...rest }: ButtonProps) => {
   return (
-    <div>
-      <button className="button" {...rest}>
-        {title}
-      </button>
-    </div>
+    <button className="button" {...rest}>
+      {title}
+    </button>
   );
 };
 
