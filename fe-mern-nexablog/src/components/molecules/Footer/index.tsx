@@ -21,17 +21,20 @@ const Footer = () => {
         </div>
         <div className="social-wrapper">
           <Icon>
-            <Link to="https://github.com/Azzaxy1">
+            <Link target="_blank" to="https://github.com/Azzaxy1">
               <FaGithub className="icon" />
             </Link>
           </Icon>
           <Icon>
-            <Link to="https://linkedin.com/Abdurrohmanazis">
+            <Link
+              target="_blank"
+              to="https://www.linkedin.com/in/Abdurrohmanazis/"
+            >
               <FaLinkedin className="icon" />
             </Link>
           </Icon>
           <Icon>
-            <Link to="https://instagram.com/ar.azis_">
+            <Link target="_blank" to="https://instagram.com/ar.azis_">
               <FaInstagram className="icon" />
             </Link>
           </Icon>
