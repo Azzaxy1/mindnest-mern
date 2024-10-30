@@ -1,0 +1,26 @@
+{
+  "name": "be-mern-nexablog",
+  "version": "1.0.0",
+  "description": "REST API Express.JS (MERN STACK)",
+  "main": "app.ts",
+  "repository": "https://github.com/Azzaxy1/mern-nexablog",
+  "author": "Azzaxy <abdurrohmanazis@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc",
+    "serve": "node dist/app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.8.4",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}
