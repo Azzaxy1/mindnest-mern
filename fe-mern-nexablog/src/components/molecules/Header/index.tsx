@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import "./header.scss";
+import { MdLogout } from "react-icons/md";
 
 const Header = () => {
   return (
@@ -10,8 +11,9 @@ const Header = () => {
             Nexa<span>Blog</span>
           </h2>
         </Link>
-        <NavLink to="/login">
-          <p className="menu-item">Logout</p>
+        <NavLink to="/login" className="menu-item">
+          <MdLogout className="icon" />
+          <p>Logout</p>
         </NavLink>
       </nav>
     </header>

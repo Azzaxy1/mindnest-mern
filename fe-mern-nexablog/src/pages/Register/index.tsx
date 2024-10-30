@@ -10,7 +10,9 @@ const Register = () => {
         <img src={RegisterBg} alt="imageBg" className="bg-image" />
       </div>
       <div className="right">
-        <h1 className="title">NexaBlog</h1>
+        <Link to="/" className="link">
+          <h1 className="title">NexaBlog</h1>
+        </Link>
         <h2 className="subtitle">Register</h2>
         <Input
           label="Username"

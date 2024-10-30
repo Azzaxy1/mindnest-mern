@@ -9,7 +9,9 @@ const Login = () => {
         <img src={LoginBg} alt="imageBg" className="bg-image" />
       </div>
       <div className="right">
-        <h1 className="title">NexaBlog</h1>
+        <Link to="/" className="link">
+          <h1 className="title">NexaBlog</h1>
+        </Link>
         <h2 className="subtitle">Login</h2>
         <Gap height={10} />
         <Input label="Email" name="email" placeholder="Email" type="email" />
@@ -21,7 +23,7 @@ const Login = () => {
           type="password"
         />
         <Gap height={30} />
-        <Link to="/">
+        <Link className="link" to="/">
           <Button title="Login" />
         </Link>
         <Gap height={60} />

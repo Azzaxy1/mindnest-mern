@@ -1,8 +1,12 @@
+import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { RegisterBg } from "../../assets";
-import { BtnBack } from "../../components";
+import { Button } from "../../components";
 import "./detailBlog.scss";
+import { useNavigate } from "react-router-dom";
 
 const DetailBlog = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="detail-blog-wrapper">
       <img className="img-cover" src={RegisterBg} alt="thumb" />
@@ -14,7 +18,11 @@ const DetailBlog = () => {
         amet Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
         modi similique dolorem ducimus repudiandae perferendis!.
       </p>
-      <BtnBack />
+      <div className="back-btn">
+        <Button iconPosition="top" title="Kembali" onClick={() => navigate(-1)}>
+          <IoChevronBackCircleOutline className="icon" />
+        </Button>
+      </div>
     </div>
   );
 };

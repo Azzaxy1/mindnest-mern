@@ -9,6 +9,10 @@
   box-sizing: border-box;
   text-transform: uppercase;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   transition: 0.3ms ease;
 }
 .button:hover {
