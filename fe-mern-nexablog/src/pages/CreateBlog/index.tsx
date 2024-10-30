@@ -1,9 +1,17 @@
-import { Button, Gap, Input, TextArea, Upload } from "../../components";
+import {
+  BtnBack,
+  Button,
+  Gap,
+  Input,
+  TextArea,
+  Upload,
+} from "../../components";
 import "./createBlog.scss";
 
 const CreateBlog = () => {
   return (
     <div className="create-blog">
+      <BtnBack />
       <p className="title">Create New Blog Post</p>
       <Input label="Post Title" name="create-blog" />
       <Upload />

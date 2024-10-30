@@ -21,7 +21,9 @@ const Login = () => {
           type="password"
         />
         <Gap height={30} />
-        <Button title="Login" />
+        <Link to="/">
+          <Button title="Login" />
+        </Link>
         <Gap height={60} />
         <p className="link">
           Belum punya akun?{" "}

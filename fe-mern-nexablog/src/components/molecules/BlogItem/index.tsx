@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import { RegisterBg } from "../../../assets";
+import { Button } from "../../atoms";
 import "./blogItem.scss";
 
 const BlogItem = () => {
@@ -13,6 +15,9 @@ const BlogItem = () => {
           perspiciatis ut sunt illum possimus.
         </p>
       </div>
+      <Link to="detail-blog">
+        <Button title="View Detail" />
+      </Link>
     </div>
   );
 };

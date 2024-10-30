@@ -1,4 +1,5 @@
 import { RegisterBg } from "../../assets";
+import { BtnBack } from "../../components";
 import "./detailBlog.scss";
 
 const DetailBlog = () => {
@@ -13,6 +14,7 @@ const DetailBlog = () => {
         amet Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
         modi similique dolorem ducimus repudiandae perferendis!.
       </p>
+      <BtnBack />
     </div>
   );
 };

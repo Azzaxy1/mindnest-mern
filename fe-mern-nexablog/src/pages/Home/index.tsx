@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BlogItem, Button, Gap } from "../../components";
 import "./home.scss";
 
@@ -5,7 +6,9 @@ const Home = () => {
   return (
     <div className="home-page-wrapper">
       <div className="create-wrapper">
-        <Button title="Create Blog" />
+        <Link to="/create-blog">
+          <Button title="Create Blog" />
+        </Link>
       </div>
       <Gap height={20} />
       <div className="content-wrapper">
