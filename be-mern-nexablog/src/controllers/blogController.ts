@@ -1,6 +1,17 @@
 import { Request, Response } from "express";
+import { validationResult } from "express-validator";
+import { CustomError } from "../types";
 
 const createBlog = (req: Request, res: Response) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const err: CustomError = new Error("Input tidak sesuai");
+    err.errorStatus = 400;
+    err.data = errors.array();
+    throw err;
+  }
+
   const { title, image, author, body, date } = req.body;
   const result = {
     message: "Create Blog Post Success",
