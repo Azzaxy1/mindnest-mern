@@ -1,14 +1,22 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
+import dotenv from "dotenv";
 
 import blogRoutes from "./routes/blog";
 import authRoutes from "./routes/auth";
 import { CustomError } from "./types";
+import connectDB from "./config/db";
 
-const app = express();
+dotenv.config();
+
+const app: Application = express();
 
 const PORT = process.env.PORT || 8080;
 const localhost = `http://localhost:${PORT}`;
 const apiVersion = "/v1";
+
+connectDB();
+
+app.use(express.json());
 
 app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -16,7 +24,6 @@ app.use((_req, res, next) => {
   next();
 });
 
-app.use(express.json());
 app.use(`${apiVersion}/auth`, authRoutes);
 app.use(`${apiVersion}/blog`, blogRoutes);
 app.use(

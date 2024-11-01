@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Create -> POST
 router.post(
-  "/post",
+  "/",
   [
     body("title").isLength({ min: 5 }).withMessage("Input title tidak sesuai"),
     body("body").isLength({ min: 10 }).withMessage("Input body tidak sesuai"),
@@ -16,6 +16,6 @@ router.post(
 );
 
 // Read -> GET
-router.get("/get", getAllBlogs);
+router.get("/", getAllBlogs);
 
 export default router;
