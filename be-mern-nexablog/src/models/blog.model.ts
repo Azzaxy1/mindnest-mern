@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IBLog } from "../types";
+import { IBLog } from "../types/blog";
 
 const { Schema } = mongoose;
 

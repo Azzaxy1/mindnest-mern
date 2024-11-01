@@ -1,10 +1,10 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 
-import blogRoutes from "./routes/blog";
-import authRoutes from "./routes/auth";
-import { CustomError } from "./types";
-import connectDB from "./config/db";
+import blogRoutes from "./routes/blog.route";
+import authRoutes from "./routes/auth.route";
+import connectDB from "./config/db.config";
+import { CustomError } from "./types/customError";
 
 dotenv.config();
 

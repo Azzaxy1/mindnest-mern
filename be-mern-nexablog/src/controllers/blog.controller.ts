@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { CustomError } from "../types";
+
 import { Blog } from "../models/blog.model";
+import { CustomError } from "../types/customError";
 
 const createBlog = async (req: Request, res: Response) => {
   const errors = validationResult(req);
@@ -34,34 +35,8 @@ const createBlog = async (req: Request, res: Response) => {
 };
 
 const getAllBlogs = async (_req: Request, res: Response) => {
-  // const result = {
-  //   message: "Blog berhasil diambil",
-  //   data: [
-  //     {
-  //       id: 1,
-  //       title: "Blog Pertama",
-  //       author: "John Doe",
-  //       body: "Lorem ipsum dolor sit amet",
-  //       date: "2021-08-01",
-  //     },
-  //     {
-  //       id: 2,
-  //       title: "Blog Kedua",
-  //       author: "Jane Doe",
-  //       body: "Lorem ipsum dolor sit amet",
-  //       date: "2021-08-02",
-  //     },
-  //     {
-  //       id: 3,
-  //       title: "Blog Ketiga",
-  //       author: "James Doe",
-  //       body: "Lorem ipsum dolor sit amet",
-  //       date: "2021-08-02",
-  //     },
-  //   ],
-  // };
-
   const getBlogs = await Blog.find();
+
   res.status(200).json(getBlogs);
 };
 

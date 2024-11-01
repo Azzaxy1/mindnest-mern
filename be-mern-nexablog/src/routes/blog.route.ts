@@ -1,7 +1,7 @@
 import express from "express";
 import { body } from "express-validator";
 
-import { createBlog, getAllBlogs } from "../controllers/blogController";
+import { createBlog, getAllBlogs } from "../controllers/blog.controller";
 
 const router = express.Router();
 
