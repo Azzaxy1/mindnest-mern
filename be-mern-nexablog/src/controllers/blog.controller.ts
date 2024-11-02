@@ -1,3 +1,6 @@
+import path from "path";
+import fs from "fs";
+
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 
@@ -137,6 +140,8 @@ const deleteBlog = async (req: Request, res: Response, next: NextFunction) => {
       throw err;
     }
 
+    removeImage(getBlog.image);
+
     res.status(200).json({
       message: "Delete Blog Post Success",
       data: getBlog,
@@ -144,6 +149,11 @@ const deleteBlog = async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     next(error);
   }
+};
+
+const removeImage = (filePath: string) => {
+  filePath = path.join(__dirname, "../..", filePath);
+  fs.unlink(filePath, (err) => console.log(err));
 };
 
 export { createBlog, getAllBlogs, getBlogById, updateBlog, deleteBlog };
