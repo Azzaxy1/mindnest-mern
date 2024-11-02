@@ -12,6 +12,7 @@ const createBlog = async (req: Request, res: Response) => {
     err.errorStatus = 400;
     err.data = errors.array();
     throw err;
+    throw err;
   }
 
   if (!req.file) {
@@ -20,8 +21,8 @@ const createBlog = async (req: Request, res: Response) => {
     throw err;
   }
 
-  const { title, body } = req.body;
-  const image = req.file.path;
+  const { title, body } = req?.body;
+  const image = req?.file?.path;
 
   const newBlog = new Blog({
     title,
@@ -79,4 +80,49 @@ const getBlogById = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createBlog, getAllBlogs, getBlogById };
+const updateBlog = async (req: Request, res: Response, next: NextFunction) => {
+  const error = validationResult(req);
+
+  if (!error.isEmpty()) {
+    const err: CustomError = new Error("Input tidak sesuai");
+    err.errorStatus = 400;
+    err.data = error.array();
+    throw err;
+  }
+
+  try {
+    const blogId = req.params.id;
+
+    const { title, body } = req?.body;
+    const image = req?.file?.path;
+
+    const getBlog = await Blog.findByIdAndUpdate(
+      blogId,
+      {
+        title,
+        body,
+        image,
+        author: {
+          uid: 1,
+          name: "Abdurrohman Azis",
+        },
+      },
+      { new: true }
+    );
+
+    if (!getBlog) {
+      const err: CustomError = new Error("Blog Post tidak ditemukan");
+      err.errorStatus = 404;
+      throw err;
+    }
+
+    res.status(200).json({
+      message: "Update Blog Post Success",
+      data: getBlog,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export { createBlog, getAllBlogs, getBlogById, updateBlog };
