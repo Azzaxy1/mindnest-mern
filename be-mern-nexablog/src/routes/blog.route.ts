@@ -3,6 +3,7 @@ import { body } from "express-validator";
 
 import {
   createBlog,
+  deleteBlog,
   getAllBlogs,
   getBlogById,
   updateBlog,
@@ -35,5 +36,8 @@ router.put(
   ],
   updateBlog
 );
+
+// Delete -> DELETE
+router.delete("/:id", deleteBlog);
 
 export default router;

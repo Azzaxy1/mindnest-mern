@@ -125,4 +125,25 @@ const updateBlog = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createBlog, getAllBlogs, getBlogById, updateBlog };
+const deleteBlog = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const blogId = req.params.id;
+
+    const getBlog = await Blog.findByIdAndDelete(blogId);
+
+    if (!getBlog) {
+      const err: CustomError = new Error("Blog Post tidak ditemukan");
+      err.errorStatus = 404;
+      throw err;
+    }
+
+    res.status(200).json({
+      message: "Delete Blog Post Success",
+      data: getBlog,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { createBlog, getAllBlogs, getBlogById, updateBlog, deleteBlog };
