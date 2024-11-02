@@ -1,3 +1,5 @@
+import path from "path";
+
 import express, { Application, NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import multer from "multer";
@@ -43,6 +45,7 @@ const fileFilter = (
 };
 
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "../images")));
 app.use(multer({ storage, fileFilter }).single("image"));
 
 app.use((_req, res, next) => {
