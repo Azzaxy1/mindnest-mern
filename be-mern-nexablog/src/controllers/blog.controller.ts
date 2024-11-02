@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 
 import { Blog } from "../models/blog.model";
@@ -41,10 +41,21 @@ const createBlog = async (req: Request, res: Response) => {
   });
 };
 
-const getAllBlogs = async (_req: Request, res: Response) => {
-  const getBlogs = await Blog.find();
+const getAllBlogs = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const getBlogs = await Blog.find();
 
-  res.status(200).json(getBlogs);
+    res.status(200).json({
+      message: "Get All Blog Posts Success",
+      data: getBlogs,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export { createBlog, getAllBlogs };
