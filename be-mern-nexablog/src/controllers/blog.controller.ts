@@ -14,7 +14,14 @@ const createBlog = async (req: Request, res: Response) => {
     throw err;
   }
 
-  const { title, image, body } = req.body;
+  if (!req.file) {
+    const err: CustomError = new Error("Image harus diupload");
+    err.errorStatus = 422;
+    throw err;
+  }
+
+  const { title, body } = req.body;
+  const image = req.file.path;
 
   const newBlog = new Blog({
     title,
