@@ -1,7 +1,11 @@
 import express from "express";
 import { body } from "express-validator";
 
-import { createBlog, getAllBlogs } from "../controllers/blog.controller";
+import {
+  createBlog,
+  getAllBlogs,
+  getBlogById,
+} from "../controllers/blog.controller";
 
 const router = express.Router();
 
@@ -17,5 +21,8 @@ router.post(
 
 // Read -> GET
 router.get("/", getAllBlogs);
+
+// Get One -> GET
+router.get("/:id", getBlogById);
 
 export default router;

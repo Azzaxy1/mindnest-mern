@@ -58,4 +58,25 @@ const getAllBlogs = async (
   }
 };
 
-export { createBlog, getAllBlogs };
+const getBlogById = async (req: Request, res: Response, next: NextFunction) => {
+  const blogId = req.params.id;
+
+  try {
+    const getBlog = await Blog.findById(blogId);
+
+    if (!getBlog) {
+      const err: CustomError = new Error("Blog Post tidak ditemukan");
+      err.errorStatus = 404;
+      throw err;
+    }
+
+    res.status(200).json({
+      message: "Get Blog Post Success",
+      data: getBlog,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export { createBlog, getAllBlogs, getBlogById };
