@@ -5,7 +5,11 @@ import { TbListDetails } from "react-icons/tb";
 import { IBLog } from "../../../types/blog";
 import { formatedDate } from "../../../utils";
 
-const BlogItem = ({ blog }: IBLog) => {
+interface BlogProps {
+  blog: IBLog;
+}
+
+const BlogItem = ({ blog }: BlogProps) => {
   const truncateText = (text: string, length: number) => {
     if (text.length > length) {
       return text.slice(0, length) + "...";
@@ -18,7 +22,7 @@ const BlogItem = ({ blog }: IBLog) => {
       <img
         className="image-thumb"
         src={`${import.meta.env.VITE_URL_ROOT}/${blog.image}`}
-        alt="post"
+        alt={blog.title}
       />
       <div className="content-detail">
         <p className="title">{blog.title}</p>

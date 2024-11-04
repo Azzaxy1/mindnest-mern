@@ -4,14 +4,12 @@ interface IAuthor {
 }
 
 export interface IBLog {
-  blog: {
-    title: string;
-    image: string;
-    body: string;
-    author: IAuthor;
-    createdAt: string;
-    updatedAt: string;
-  };
+  title: string;
+  image: string;
+  body: string;
+  author: IAuthor;
+  createdAt: string;
+  updatedAt: string;
 }
 
 // export interface BlogItemProps {
