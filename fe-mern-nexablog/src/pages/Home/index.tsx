@@ -19,8 +19,6 @@ const Home = () => {
 
   const name = useSelector((state: BlogState) => state.name);
   const dataBlogs = useSelector((state: BlogState) => state.dataBlogs);
-  console.log("dataBlogs:", dataBlogs);
-  console.log("name", name);
 
   useEffect(() => {
     setTimeout(() => {
