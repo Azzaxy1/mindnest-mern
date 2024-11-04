@@ -1,30 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updatedDataBlog, updatedName } from "../../config/redux/store";
-import { IBLog } from "../../types/blog";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import { BlogItem, Button, Gap } from "../../components";
-import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import "./home.scss";
 
-interface BlogState {
-  dataBlogs: IBLog[];
-  name: string;
-}
+import { BlogItem, Button, Gap } from "../../components";
+import { updatedDataBlog } from "../../config";
+import { IHomeState } from "../../types/homeTypes";
+import "./home.scss";
 
 const Home = () => {
   const dispatch = useDispatch();
 
-  const name = useSelector((state: BlogState) => state.name);
-  const dataBlogs = useSelector((state: BlogState) => state.dataBlogs);
+  const { dataBlogs } = useSelector((state: IHomeState) => state.home);
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(updatedName("Azis"));
-    }, 3000);
-
     const blogUrl = `${import.meta.env.VITE_URL_API}/blog?perPage=4`;
     axios
       .get(blogUrl)
@@ -46,7 +37,6 @@ const Home = () => {
           </Button>
         </Link>
       </div>
-      <p>{name}</p>
       <Gap height={20} />
       <div className="content-wrapper">
         {dataBlogs.map((blog, index) => (

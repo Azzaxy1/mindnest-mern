@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../../atoms";
 import "./blogItem.scss";
 import { TbListDetails } from "react-icons/tb";
-import { IBLog } from "../../../types/blog";
+import { IBLog } from "../../../types/blogTypes";
 import { formatedDate } from "../../../utils";
 
 interface BlogProps {

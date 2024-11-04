@@ -11,13 +11,3 @@ export interface IBLog {
   createdAt: string;
   updatedAt: string;
 }
-
-// export interface BlogItemProps {
-//   blog: {
-//     image: string;
-//     title: string;
-//     author: string;
-//     date: string;
-//     body: string;
-//   };
-// }
