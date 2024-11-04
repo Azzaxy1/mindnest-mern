@@ -45,17 +45,24 @@ const createBlog = async (req: Request, res: Response) => {
   });
 };
 
-const getAllBlogs = async (
-  _req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const getAllBlogs = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const getBlogs = await Blog.find();
+    const currentPage = Number(req.query.page) || 1;
+    const perPage = Number(req.query.perPage) || 5;
+
+    let totalItems = await Blog.countDocuments();
+
+    const getBlogs = await Blog.find()
+      .lean()
+      .skip((currentPage - 1) * perPage)
+      .limit(perPage);
 
     res.status(200).json({
       message: "Get All Blog Posts Success",
       data: getBlogs,
+      total_data: totalItems,
+      per_page: perPage,
+      current_page: currentPage,
     });
   } catch (error) {
     next(error);
