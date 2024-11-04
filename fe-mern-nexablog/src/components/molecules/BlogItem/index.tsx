@@ -1,20 +1,31 @@
 import { Link } from "react-router-dom";
-import { RegisterBg } from "../../../assets";
 import { Button } from "../../atoms";
 import "./blogItem.scss";
 import { TbListDetails } from "react-icons/tb";
+import { IBLog } from "../../../types/blog";
+import { formatedDate } from "../../../utils";
 
-const BlogItem = () => {
+const BlogItem = ({ blog }: IBLog) => {
+  const truncateText = (text: string, length: number) => {
+    if (text.length > length) {
+      return text.slice(0, length) + "...";
+    }
+    return text;
+  };
+
   return (
     <div className="blog-item">
-      <img className="image-thumb" src={RegisterBg} alt="post" />
+      <img
+        className="image-thumb"
+        src={`${import.meta.env.VITE_URL_ROOT}/${blog.image}`}
+        alt="post"
+      />
       <div className="content-detail">
-        <p className="title">Title</p>
-        <p className="author">Author - Date Post</p>
-        <p className="body">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae in,
-          perspiciatis ut sunt illum possimus.
+        <p className="title">{blog.title}</p>
+        <p className="author">
+          {blog.author.name} - {formatedDate(blog.createdAt)}
         </p>
+        <p className="body">{truncateText(blog.body, 100)}</p>
       </div>
       <Link className="link" to="detail-blog">
         <Button title="View Detail" iconPosition="bottom">
