@@ -9,5 +9,9 @@ export interface IGlobalState {
 export interface IHomeState {
   home: {
     dataBlogs: IBLog[];
+    page: {
+      currentPage: number;
+      totalPage: number;
+    };
   };
 }

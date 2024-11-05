@@ -3,10 +3,18 @@ import { IBLog } from "../../../types/blogTypes";
 
 interface HomeState {
   dataBlogs: IBLog[];
+  page: {
+    currentPage: number;
+    totalPage: number;
+  };
 }
 
 const initialState: HomeState = {
   dataBlogs: [],
+  page: {
+    currentPage: 1,
+    totalPage: 1,
+  },
 };
 
 export const homeSlice = createSlice({
@@ -16,9 +24,15 @@ export const homeSlice = createSlice({
     updatedDataBlog: (state, action: PayloadAction<IBLog[]>) => {
       state.dataBlogs = action.payload;
     },
+    updatedPage: (
+      state,
+      action: PayloadAction<{ currentPage: number; totalPage: number }>
+    ) => {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { updatedDataBlog } = homeSlice.actions;
+export const { updatedDataBlog, updatedPage } = homeSlice.actions;
 
 export default homeSlice.reducer;

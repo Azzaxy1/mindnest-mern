@@ -1,32 +1,46 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
 import { BlogItem, Button, Gap } from "../../components";
-import { updatedDataBlog } from "../../config";
+import { fetchBlogs } from "../../services/blogService";
 import { IHomeState } from "../../types/homeTypes";
 import "./home.scss";
+import { updatedPage } from "../../config";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const perPage = 4;
 
-  const { dataBlogs } = useSelector((state: IHomeState) => state.home);
+  const { dataBlogs, page } = useSelector((state: IHomeState) => state.home);
 
   useEffect(() => {
-    const blogUrl = `${import.meta.env.VITE_URL_API}/blog?perPage=4`;
-    axios
-      .get(blogUrl)
-      .then((res) => {
-        const response = res.data;
-        dispatch(updatedDataBlog(response.data));
-      })
-      .catch((err) => {
-        console.log("error:", err);
-      });
-  }, [dispatch]);
+    fetchBlogs(dispatch, page.currentPage, perPage);
+  }, [dispatch, page.currentPage, perPage]);
+
+  const handlePrevPage = () => {
+    if (page.currentPage > 1) {
+      dispatch(
+        updatedPage({
+          currentPage: page.currentPage - 1,
+          totalPage: page.totalPage,
+        })
+      );
+    }
+  };
+
+  const handleNextPage = () => {
+    if (page.currentPage < page.totalPage) {
+      dispatch(
+        updatedPage({
+          currentPage: page.currentPage + 1,
+          totalPage: page.totalPage,
+        })
+      );
+    }
+  };
 
   return (
     <div className="home-page-wrapper">
@@ -44,11 +58,15 @@ const Home = () => {
         ))}
       </div>
       <div className="pagination">
-        <Button title="Previous" iconPosition="top">
+        <Button title="Previous" iconPosition="top" onClick={handlePrevPage}>
           <GrPrevious />
         </Button>
         <Gap width={20} />
-        <Button title="Next" iconPosition="bottom">
+        <p className="text-page">
+          {page?.currentPage ?? 0} / {page?.totalPage ?? 0}
+        </p>
+        <Gap width={20} />
+        <Button title="Next" iconPosition="bottom" onClick={handleNextPage}>
           <GrNext />
         </Button>
       </div>
