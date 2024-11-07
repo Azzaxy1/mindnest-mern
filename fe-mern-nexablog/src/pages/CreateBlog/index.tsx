@@ -12,8 +12,6 @@ const CreateBlog = () => {
   const [body, onChangeBody] = useInput("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  console.log("imageFile:", imageFile && imageFile.name);
-
   const navigate = useNavigate();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
