@@ -4,6 +4,8 @@ import "./blogItem.scss";
 import { TbListDetails } from "react-icons/tb";
 import { IBLog } from "../../../types/blogTypes";
 import { formatedDate } from "../../../utils";
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
 
 interface BlogProps {
   blog: IBLog;
@@ -25,7 +27,16 @@ const BlogItem = ({ blog }: BlogProps) => {
         alt={blog.title}
       />
       <div className="content-detail">
-        <p className="title">{blog.title}</p>
+        <div className="title-wrapper">
+          <p className="title">{blog.title}</p>
+          <div className="edit-wrapper">
+            <Link to={`create-blog/${blog._id}`}>
+              <FaEdit className="delete-icon" />
+            </Link>{" "}
+            |
+            <RiDeleteBin6Fill className="edit-icon" />
+          </div>
+        </div>
         <p className="author">
           {blog.author.name} - {formatedDate(blog.createdAt)}
         </p>

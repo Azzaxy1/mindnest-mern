@@ -1,9 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button, Gap, Input, TextArea, Upload } from "../../components";
-import { fetchAddBlog } from "../../services/blogService";
+import {
+  fetchAddBlog,
+  fetchBlogById,
+  fetchUpdateBlog,
+} from "../../services/blogService";
 import "./createBlog.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpdatedForm } from "../../config";
@@ -16,11 +20,32 @@ interface ICreateBLogState {
 const CreateBlog = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { form } = useSelector((state: ICreateBLogState) => state.createBlog);
   const { title, body } = form;
+  console.log("form:", form);
+
+  useEffect(() => {
+    if (id) {
+      setIsUpdate(true);
+      fetchBlogById(id).then((data) => {
+        console.log("data", data);
+        setPreviewUrl(`${import.meta.env.VITE_URL_ROOT}/${data.image}`);
+        dispatch(
+          setUpdatedForm({
+            ...data,
+            image: data.image,
+            body: data.body,
+            title: data.title,
+          })
+        );
+      });
+    }
+  }, [id, dispatch]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -38,7 +63,11 @@ const CreateBlog = () => {
     if (imageFile) {
       formData.append("image", imageFile);
     }
-    fetchAddBlog(formData, navigate);
+    if (isUpdate) {
+      fetchUpdateBlog(id, formData, navigate);
+    } else {
+      fetchAddBlog(formData, navigate);
+    }
   };
 
   return (
@@ -48,7 +77,7 @@ const CreateBlog = () => {
           <IoChevronBackCircleOutline className="icon" />
         </Button>
       </div>
-      <p className="title">Create New Blog Post</p>
+      <p className="title">{isUpdate ? "Update" : "Create New"} Blog Post</p>
       <Input
         value={title}
         onChange={(e) =>
@@ -66,7 +95,7 @@ const CreateBlog = () => {
       />
       <Gap height={20} />
       <div className="btn-create">
-        <Button title="Save" onClick={handleClick} />
+        <Button title={isUpdate ? "Update" : "Save"} onClick={handleClick} />
       </div>
       <Gap height={20} />
     </div>

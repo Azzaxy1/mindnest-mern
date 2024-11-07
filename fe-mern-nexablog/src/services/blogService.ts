@@ -48,17 +48,17 @@ const fetchBlogById = async (id: string | undefined) => {
   }
 };
 
-const fetchUpdateBlog = async (data: FormData, navigate: NavigateFunction) => {
+const fetchUpdateBlog = async (
+  id: string | undefined,
+  data: FormData,
+  navigate: NavigateFunction
+) => {
   try {
-    const updatedData = await axios.put(
-      `${blogUrl}/blog/${data.get("id")}`,
-      data,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const updatedData = await axios.put(`${blogUrl}/blog/${id}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     console.log("updatedData: ", updatedData);
     navigate("/");
   } catch (err) {

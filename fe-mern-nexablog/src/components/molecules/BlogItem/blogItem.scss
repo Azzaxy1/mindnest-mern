@@ -14,12 +14,37 @@
   .content-detail {
     padding: 16px;
 
-    .title {
-      margin: 0px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #313131;
+    .title-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .title {
+        margin: 0px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #313131;
+      }
+      .edit-wrapper {
+        display: flex;
+        align-items: center;
+        .delete-icon {
+          cursor: pointer;
+          width: 20px;
+          height: 20px;
+          color: #03a9f4;
+          cursor: pointer;
+          margin-right: 8px;
+        }
+        .edit-icon {
+          width: 20px;
+          height: 20px;
+          color: red;
+          cursor: pointer;
+          margin-left: 8px;
+        }
+      }
     }
+
     .author {
       margin-top: 4px;
       font-size: 12px;
