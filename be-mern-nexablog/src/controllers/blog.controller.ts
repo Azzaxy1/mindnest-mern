@@ -15,7 +15,6 @@ const createBlog = async (req: Request, res: Response) => {
     err.errorStatus = 400;
     err.data = errors.array();
     throw err;
-    throw err;
   }
 
   if (!req.file) {

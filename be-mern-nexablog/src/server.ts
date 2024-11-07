@@ -3,6 +3,7 @@ import path from "path";
 import express, { Application, NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import multer from "multer";
+import cors from "cors";
 
 import blogRoutes from "./routes/blog.route";
 import authRoutes from "./routes/auth.route";
@@ -13,7 +14,7 @@ dotenv.config();
 
 const app: Application = express();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 const localhost = `http://localhost:${PORT}`;
 const apiVersion = "/v1";
 
@@ -48,11 +49,13 @@ app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "../images")));
 app.use(multer({ storage, fileFilter }).single("image"));
 
-app.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  next();
-});
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 app.use(`${apiVersion}/auth`, authRoutes);
 app.use(`${apiVersion}/blog`, blogRoutes);

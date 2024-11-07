@@ -11,3 +11,9 @@ export interface IBLog {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Blog {
+  title: string;
+  image: string;
+  body: string;
+}
