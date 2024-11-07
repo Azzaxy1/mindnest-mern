@@ -4,21 +4,31 @@ import { useState } from "react";
 
 import { Button, Gap, Input, TextArea, Upload } from "../../components";
 import { fetchAddBlog } from "../../services/blogService";
-import useInput from "../../hooks/useInput";
 import "./createBlog.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setUpdatedForm } from "../../config";
+import { CreateBlogState } from "../../types/createBlogTypes";
+
+interface ICreateBLogState {
+  createBlog: CreateBlogState;
+}
 
 const CreateBlog = () => {
-  const [title, onChangeTitle] = useInput("");
-  const [body, onChangeBody] = useInput("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { form } = useSelector((state: ICreateBLogState) => state.createBlog);
+  const { title, body } = form;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setImageFile(file);
+      console.log("file:", file.name);
       setPreviewUrl(URL.createObjectURL(file));
+      dispatch(setUpdatedForm({ ...form, image: file.name }));
     }
   };
 
@@ -42,12 +52,19 @@ const CreateBlog = () => {
       <p className="title">Create New Blog Post</p>
       <Input
         value={title}
-        onChange={onChangeTitle}
+        onChange={(e) =>
+          dispatch(setUpdatedForm({ ...form, title: e.target.value }))
+        }
         label="Post Title"
         name="create-blog"
       />
       <Upload onChange={handleFileChange} image={previewUrl} />
-      <TextArea value={body} onChange={onChangeBody} />
+      <TextArea
+        value={body}
+        onChange={(e) =>
+          dispatch(setUpdatedForm({ ...form, body: e.target.value }))
+        }
+      />
       <Gap height={20} />
       <div className="btn-create">
         <Button title="Save" onClick={handleClick} />
