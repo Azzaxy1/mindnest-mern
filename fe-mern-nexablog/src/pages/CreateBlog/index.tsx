@@ -26,7 +26,6 @@ const CreateBlog = () => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setImageFile(file);
-      console.log("file:", file.name);
       setPreviewUrl(URL.createObjectURL(file));
       dispatch(setUpdatedForm({ ...form, image: file.name }));
     }

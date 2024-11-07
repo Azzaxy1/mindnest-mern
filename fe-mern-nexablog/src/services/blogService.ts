@@ -39,4 +39,22 @@ const fetchAddBlog = (data: FormData, navigate: NavigateFunction) => {
     });
 };
 
-export { fetchBlogs, fetchAddBlog };
+const fetchUpdateBlog = async (data: FormData, navigate: NavigateFunction) => {
+  try {
+    const updatedData = await axios.put(
+      `${blogUrl}/blog/${data.get("id")}`,
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("updatedData: ", updatedData);
+    navigate("/");
+  } catch (err) {
+    console.log("err: ", err);
+  }
+};
+
+export { fetchBlogs, fetchAddBlog, fetchUpdateBlog };
