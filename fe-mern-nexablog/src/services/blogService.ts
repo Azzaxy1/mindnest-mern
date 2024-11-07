@@ -39,6 +39,15 @@ const fetchAddBlog = (data: FormData, navigate: NavigateFunction) => {
     });
 };
 
+const fetchBlogById = async (id: string | undefined) => {
+  try {
+    const res = await axios.get(`${blogUrl}/blog/${id}`);
+    return res.data.data;
+  } catch (err) {
+    console.log("err: ", err);
+  }
+};
+
 const fetchUpdateBlog = async (data: FormData, navigate: NavigateFunction) => {
   try {
     const updatedData = await axios.put(
@@ -57,4 +66,4 @@ const fetchUpdateBlog = async (data: FormData, navigate: NavigateFunction) => {
   }
 };
 
-export { fetchBlogs, fetchAddBlog, fetchUpdateBlog };
+export { fetchBlogs, fetchAddBlog, fetchUpdateBlog, fetchBlogById };

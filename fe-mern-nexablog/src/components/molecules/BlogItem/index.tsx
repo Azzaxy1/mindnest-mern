@@ -31,7 +31,7 @@ const BlogItem = ({ blog }: BlogProps) => {
         </p>
         <p className="body">{truncateText(blog.body, 100)}</p>
       </div>
-      <Link className="link" to="detail-blog">
+      <Link className="link" to={`detail-blog/${blog._id}`}>
         <Button title="View Detail" iconPosition="bottom">
           <TbListDetails />
         </Button>
