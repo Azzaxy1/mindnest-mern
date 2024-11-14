@@ -59,8 +59,6 @@ const CreateBlog = () => {
     }
   };
 
-  console.log("isUpdate:", isUpdate);
-
   const handleClick = () => {
     const formData = new FormData();
     formData.append("title", title);
