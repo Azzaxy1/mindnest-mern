@@ -66,4 +66,19 @@ const fetchUpdateBlog = async (
   }
 };
 
-export { fetchBlogs, fetchAddBlog, fetchUpdateBlog, fetchBlogById };
+const fetchDeleteBlog = async (id: string | undefined) => {
+  try {
+    await axios.delete(`${blogUrl}/blog/${id}`);
+    console.log("delete success");
+  } catch (err) {
+    console.log("err: ", err);
+  }
+};
+
+export {
+  fetchBlogs,
+  fetchAddBlog,
+  fetchUpdateBlog,
+  fetchBlogById,
+  fetchDeleteBlog,
+};

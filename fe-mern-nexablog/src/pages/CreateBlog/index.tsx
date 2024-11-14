@@ -27,13 +27,11 @@ const CreateBlog = () => {
 
   const { form } = useSelector((state: ICreateBLogState) => state.createBlog);
   const { title, body } = form;
-  console.log("form:", form);
 
   useEffect(() => {
     if (id) {
       setIsUpdate(true);
       fetchBlogById(id).then((data) => {
-        console.log("data", data);
         setPreviewUrl(`${import.meta.env.VITE_URL_ROOT}/${data.image}`);
         dispatch(
           setUpdatedForm({

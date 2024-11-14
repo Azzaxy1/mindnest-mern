@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import { GrNext, GrPrevious } from "react-icons/gr";
+import Swall from "sweetalert2";
 
 import { BlogItem, Button, Gap } from "../../components";
-import { fetchBlogs } from "../../services/blogService";
+import { fetchBlogs, fetchDeleteBlog } from "../../services/blogService";
 import { IHomeState } from "../../types/homeTypes";
-import "./home.scss";
 import { updatedPage } from "../../config";
+import "./home.scss";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,41 @@ const Home = () => {
     }
   };
 
+  const handleDeleteBlog = (id: string) => {
+    Swall.fire({
+      title: "Yakin ingin menghapus blog ini?",
+      text: "Blog yang sudah dihapus tidak dapat dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetchDeleteBlog(id)
+          .then(() => {
+            Swall.fire({
+              title: "Dihapus!",
+              text: "Blog berhasil dihapus",
+              icon: "success",
+              confirmButtonText: "Oke",
+            });
+            fetchBlogs(dispatch, page.currentPage, perPage);
+          })
+          .catch((err) => {
+            console.log("err:", err);
+            Swall.fire({
+              title: "Gagal!",
+              text: "Blog gagal dihapus",
+              icon: "error",
+              confirmButtonText: "Oke",
+            });
+          });
+      }
+    });
+  };
+
   return (
     <div className="home-page-wrapper">
       <div className="create-wrapper">
@@ -54,7 +90,7 @@ const Home = () => {
       <Gap height={20} />
       <div className="content-wrapper">
         {dataBlogs.map((blog, index) => (
-          <BlogItem key={index} blog={blog} />
+          <BlogItem key={index} blog={blog} onDelete={handleDeleteBlog} />
         ))}
       </div>
       <div className="pagination">

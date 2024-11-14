@@ -9,9 +9,10 @@ import { FaEdit } from "react-icons/fa";
 
 interface BlogProps {
   blog: IBLog;
+  onDelete: (id: string) => void;
 }
 
-const BlogItem = ({ blog }: BlogProps) => {
+const BlogItem = ({ blog, onDelete }: BlogProps) => {
   const truncateText = (text: string, length: number) => {
     if (text.length > length) {
       return text.slice(0, length) + "...";
@@ -31,10 +32,13 @@ const BlogItem = ({ blog }: BlogProps) => {
           <p className="title">{blog.title}</p>
           <div className="edit-wrapper">
             <Link to={`create-blog/${blog._id}`}>
-              <FaEdit className="delete-icon" />
+              <FaEdit className="edit-icon" />
             </Link>{" "}
             |
-            <RiDeleteBin6Fill className="edit-icon" />
+            <RiDeleteBin6Fill
+              className="delete-icon"
+              onClick={() => onDelete(blog._id)}
+            />
           </div>
         </div>
         <p className="author">
