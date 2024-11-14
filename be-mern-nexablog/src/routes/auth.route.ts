@@ -1,9 +1,30 @@
 import express from "express";
+import { body } from "express-validator";
+
 import { login, register } from "../controllers/auth.controller";
 
 const router = express.Router();
 
-router.post("/register", register);
-router.post("/login", login);
+router.post(
+  "/register",
+  [
+    body("name").isLength({ min: 5 }).withMessage("Input name tidak sesuai"),
+    body("email").isLength({ min: 5 }).withMessage("Input email tidak sesuai"),
+    body("password")
+      .isLength({ min: 5 })
+      .withMessage("Input password tidak sesuai"),
+  ],
+  register
+);
+router.post(
+  "/login",
+  [
+    body("email").isLength({ min: 5 }).withMessage("Input email tidak sesuai"),
+    body("password")
+      .isLength({ min: 5 })
+      .withMessage("Input password tidak sesuai"),
+  ],
+  login
+);
 
 export default router;
