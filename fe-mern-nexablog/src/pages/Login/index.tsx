@@ -43,7 +43,6 @@ const Login = () => {
         />
         <Gap height={30} />
         <Button title="Login" onClick={handleLogin} />
-        <Gap height={60} />
         <p className="link">
           Belum punya akun?{" "}
           <Link to="/register" className="redirect">
