@@ -30,7 +30,9 @@ const Register = () => {
           type="password"
         />
         <Gap height={20} />
-        <Button title="Register" />
+        <Link to="/login">
+          <Button title="Register" />
+        </Link>
         <Gap height={25} />
         <p className="link">
           Sudah punya akun?{" "}

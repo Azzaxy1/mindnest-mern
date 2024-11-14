@@ -12,6 +12,8 @@ import "./createBlog.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpdatedForm } from "../../config";
 import { CreateBlogState } from "../../types/createBlogTypes";
+import Swal from "sweetalert2";
+import { resetForm } from "../../config/redux/reducers/createBlogSlice";
 
 interface ICreateBLogState {
   createBlog: CreateBlogState;
@@ -42,6 +44,9 @@ const CreateBlog = () => {
           })
         );
       });
+    } else {
+      setIsUpdate(false);
+      dispatch(resetForm());
     }
   }, [id, dispatch]);
 
@@ -54,6 +59,8 @@ const CreateBlog = () => {
     }
   };
 
+  console.log("isUpdate:", isUpdate);
+
   const handleClick = () => {
     const formData = new FormData();
     formData.append("title", title);
@@ -62,8 +69,20 @@ const CreateBlog = () => {
       formData.append("image", imageFile);
     }
     if (isUpdate) {
+      Swal.fire({
+        title: "Update Blog!",
+        text: "Berhasil mengubah blog",
+        icon: "success",
+        confirmButtonText: "Oke",
+      });
       fetchUpdateBlog(id, formData, navigate);
     } else {
+      Swal.fire({
+        title: "Create Blog!",
+        text: "Berhasil membuat blog",
+        icon: "success",
+        confirmButtonText: "Oke",
+      });
       fetchAddBlog(formData, navigate);
     }
   };

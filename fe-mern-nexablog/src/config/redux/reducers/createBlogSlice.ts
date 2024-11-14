@@ -23,9 +23,12 @@ const createBlogSlice = createSlice({
     ) => {
       state.form = action.payload;
     },
+    resetForm: (state) => {
+      state.form = initialState.form;
+    },
   },
 });
 
-export const { setUpdatedForm } = createBlogSlice.actions;
+export const { setUpdatedForm, resetForm } = createBlogSlice.actions;
 
 export default createBlogSlice.reducer;
