@@ -1,8 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginBg } from "../../assets";
 import { Button, Gap, Input } from "../../components";
+import useInput from "../../hooks/useInput";
+import { fetchLogin } from "../../services/authService";
 
 const Login = () => {
+  const [email, handleEmail] = useInput("");
+  const [password, handlePassword] = useInput("");
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    fetchLogin({ email, password }, navigate);
+  };
+
   return (
     <div className="main-page">
       <div className="left">
@@ -14,18 +24,25 @@ const Login = () => {
         </Link>
         <h2 className="subtitle">Login</h2>
         <Gap height={10} />
-        <Input label="Email" name="email" placeholder="Email" type="email" />
+        <Input
+          value={email}
+          label="Email"
+          name="email"
+          placeholder="Email"
+          type="email"
+          onChange={handleEmail}
+        />
         <Gap height={10} />
         <Input
+          value={password}
           label="Password"
           name="password"
           placeholder="Password"
           type="password"
+          onChange={handlePassword}
         />
         <Gap height={30} />
-        <Link className="link" to="/">
-          <Button title="Login" />
-        </Link>
+        <Button title="Login" onClick={handleLogin} />
         <Gap height={60} />
         <p className="link">
           Belum punya akun?{" "}

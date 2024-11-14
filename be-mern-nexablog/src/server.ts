@@ -66,6 +66,7 @@ app.use(
     const data = error.data;
 
     res.status(status).json({ message, data });
+    return;
   }
 );
 

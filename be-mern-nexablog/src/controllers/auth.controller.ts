@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { CustomError } from "../types/customError";
 import { Auth } from "../models/auth.model";
@@ -40,20 +40,21 @@ const login = async (req: Request, res: Response) => {
     const err: CustomError = new Error("Input tidak sesuai");
     err.errorStatus = 400;
     err.data = errors.array();
-    throw err;
+    return;
   }
   const { email, password } = req.body;
+  const user = await Auth.findOne({ email, password });
 
   if (!email || !password) {
     const error = new Error("All input is required");
     res.status(400).json({ message: error.message });
+    return;
   }
-
-  const user = await Auth.findOne({ email, password });
 
   if (!user) {
     const error = new Error("User not found");
     res.status(404).json({ message: error.message });
+    return;
   }
 
   res.status(200).json({
