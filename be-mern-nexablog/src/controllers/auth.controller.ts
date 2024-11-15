@@ -30,19 +30,19 @@ const register = async (req: Request, res: Response) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const result = new User({
+    const newUser = new User({
       name,
       email,
       password: hashedPassword,
     });
 
-    const token = await result.generateAuthToken();
-    result.token = token;
-    const savedResult = await result.save();
+    await newUser.save();
+
+    const token = await newUser.generateAuthToken();
 
     res.status(201).json({
       data: {
-        token: savedResult.token,
+        token,
       },
     });
   } catch (error) {
@@ -63,24 +63,10 @@ const login = async (req: Request, res: Response): Promise<void> => {
     }
     const { email, password } = req.body;
 
-    if (!email || !password) {
-      const error = new Error("All input is required");
-      res.status(400).json({ message: error.message });
-      return;
-    }
-
     const user = await User.findOne({ email });
 
-    if (!user) {
-      const error = new Error("User not found");
-      res.status(404).json({ message: error.message });
-      return;
-    }
-
-    const isMatch = await user.comparePassword(password);
-
-    if (!isMatch) {
-      res.status(400).json({ message: "Invalid credentials" });
+    if (!user || !(await user.comparePassword(password))) {
+      res.status(404).json({ message: "Invalid credentials" });
       return;
     }
 
@@ -96,4 +82,12 @@ const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { register, login };
+const getMe = (req: Request, res: Response) => {
+  const user = req.user;
+
+  res.status(200).json({
+    data: user,
+  });
+};
+
+export { register, login, getMe };

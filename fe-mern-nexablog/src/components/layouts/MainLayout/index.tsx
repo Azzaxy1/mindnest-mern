@@ -3,27 +3,42 @@ import { Footer, Header } from "../../molecules";
 import "./main-layout.scss";
 import { useEffect, useState } from "react";
 import { fetchUserLogged } from "../../../services/authService";
-// import IUser from "../../../types/userType";
-
-// interface MainLayoutProps {
-//   user: IUser | null;
-// }
+import Swal from "sweetalert2";
 
 const MainLayout = () => {
   const [user, setUser] = useState(null);
-  console.log("user", user);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchUserLogged().then((res) => {
-      setUser(res?.data);
-    });
-  }, []);
+    const token = localStorage.getItem("token");
 
-  const navigate = useNavigate();
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    fetchUserLogged()
+      .then((res) => {
+        if (!res.data) {
+          navigate("/login");
+        } else {
+          setUser(res?.data);
+        }
+      })
+      .catch(() => {
+        navigate("/login");
+      });
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
+
+    Swal.fire({
+      icon: "success",
+      title: "Logout Success",
+      text: "Thank you for using NexaBlog",
+    });
   };
 
   return (

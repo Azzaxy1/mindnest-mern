@@ -20,7 +20,7 @@ const userSchema = new Schema<IUser>(
     email: {
       type: String,
       required: true,
-      unique: true, // Tambahkan unique jika diperlukan
+      unique: true,
     },
     password: {
       type: String,
@@ -40,13 +40,9 @@ userSchema.methods.generateAuthToken = async function () {
   const user = this;
   const token = jwt.sign(
     { _id: user._id.toString() },
-    process.env.JWT_SECRET as string
+    process.env.JWT_SECRET as string,
+    { expiresIn: "1h" }
   );
-
-  // Simpan token langsung sebagai properti
-  user.token = token;
-
-  await user.save();
   return token;
 };
 

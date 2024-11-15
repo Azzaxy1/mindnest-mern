@@ -8,14 +8,12 @@ const fetchLogin = async (
   data: { email: string; password: string },
   navigate: NavigateFunction
 ) => {
-  console.log("data:", data);
   try {
     const res = await axios.post(`${blogUrl}/auth/login`, data, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log("res", res.data.data.token);
 
     if (res.status === 200) {
       Swal.fire({

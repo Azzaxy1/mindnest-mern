@@ -30,8 +30,7 @@ const fetchAddBlog = (data: FormData, navigate: NavigateFunction) => {
         "Content-Type": "multipart/form-data",
       },
     })
-    .then((res) => {
-      console.log("res:", res);
+    .then(() => {
       navigate("/");
     })
     .catch((err) => {
@@ -54,12 +53,11 @@ const fetchUpdateBlog = async (
   navigate: NavigateFunction
 ) => {
   try {
-    const updatedData = await axios.put(`${blogUrl}/blog/${id}`, data, {
+    await axios.put(`${blogUrl}/blog/${id}`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log("updatedData: ", updatedData);
     navigate("/");
   } catch (err) {
     console.log("err: ", err);
@@ -69,7 +67,6 @@ const fetchUpdateBlog = async (
 const fetchDeleteBlog = async (id: string | undefined) => {
   try {
     await axios.delete(`${blogUrl}/blog/${id}`);
-    console.log("delete success");
   } catch (err) {
     console.log("err: ", err);
   }

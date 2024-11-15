@@ -1,7 +1,7 @@
 import express from "express";
 import { body } from "express-validator";
 
-import { login, register } from "../controllers/auth.controller";
+import { getMe, login, register } from "../controllers/auth.controller";
 import authMiddleware from "../middleware/auth.middleware";
 
 const router = express.Router();
@@ -28,12 +28,6 @@ router.post(
   login
 );
 
-router.get("/me", authMiddleware, (req, res) => {
-  const userWithoutToken = { ...req.user.toObject(), token: undefined };
-
-  res.json({
-    data: userWithoutToken,
-  });
-});
+router.get("/me", authMiddleware, getMe);
 
 export default router;
