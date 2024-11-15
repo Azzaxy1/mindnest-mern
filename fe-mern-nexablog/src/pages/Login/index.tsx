@@ -9,8 +9,11 @@ const Login = () => {
   const [password, handlePassword] = useInput("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    fetchLogin({ email, password }, navigate);
+  const handleLogin = async () => {
+    const token = await fetchLogin({ email, password }, navigate);
+    if (token) {
+      localStorage.setItem("token", token);
+    }
   };
 
   return (

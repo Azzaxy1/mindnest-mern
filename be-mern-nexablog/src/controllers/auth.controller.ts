@@ -5,39 +5,50 @@ import { User } from "../models/user.model";
 import bcrypt from "bcryptjs";
 
 const register = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
+  try {
+    const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    const err: CustomError = new Error("Input tidak sesuai");
-    err.errorStatus = 400;
-    err.data = errors.array();
-    throw err;
-  }
+    if (!errors.isEmpty()) {
+      const err: CustomError = new Error("Input is not valid");
+      err.errorStatus = 400;
+      err.data = errors.array();
+      throw err;
+    }
 
-  const { name, email, password } = req.body;
-  if (!name || !email || !password) {
-    const error = new Error("All input is required");
-    res.status(400).json({ message: error.message });
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      const error = new Error("All input is required");
+      res.status(400).json({ message: error.message });
+      return;
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      res.status(409).json({ message: "User already exists" });
+      return;
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const result = new User({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    const token = await result.generateAuthToken();
+    result.token = token;
+    const savedResult = await result.save();
+
+    res.status(201).json({
+      data: {
+        token: savedResult.token,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error!" });
     return;
   }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const result = new User({
-    name,
-    email,
-    password: hashedPassword,
-  });
-
-  const token = await result.generateAuthToken();
-  result.token = token;
-  const savedResult = await result.save();
-
-  res.status(201).json({
-    data: {
-      token: savedResult.token,
-    },
-  });
 };
 
 const login = async (req: Request, res: Response): Promise<void> => {
@@ -81,6 +92,7 @@ const login = async (req: Request, res: Response): Promise<void> => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error!" });
+    return;
   }
 };
 

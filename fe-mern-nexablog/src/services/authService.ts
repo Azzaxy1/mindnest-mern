@@ -15,6 +15,7 @@ const fetchLogin = async (
         "Content-Type": "application/json",
       },
     });
+    console.log("res", res.data.data.token);
 
     if (res.status === 200) {
       Swal.fire({
@@ -24,6 +25,9 @@ const fetchLogin = async (
       });
       navigate("/");
     }
+    const { token } = res.data.data;
+
+    return token;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     const errorMessage = err.response?.data?.message || "An error occurred";
@@ -66,4 +70,14 @@ const fetchRegister = async (
   }
 };
 
-export { fetchLogin, fetchRegister };
+const fetchUserLogged = async () => {
+  const res = await axios.get(`${blogUrl}/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  return res.data;
+};
+
+export { fetchLogin, fetchRegister, fetchUserLogged };

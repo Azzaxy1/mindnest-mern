@@ -29,7 +29,11 @@ router.post(
 );
 
 router.get("/me", authMiddleware, (req, res) => {
-  res.json(req.user);
+  const userWithoutToken = { ...req.user.toObject(), token: undefined };
+
+  res.json({
+    data: userWithoutToken,
+  });
 });
 
 export default router;
