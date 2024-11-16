@@ -56,9 +56,21 @@ app.use(
   cors({
     origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Cross-Origin-Opener-Policy",
+      "same-origin",
+      "Referrer-Policy",
+      "no-referrer-when-downgrade",
+    ],
   })
 );
+// app.use((req, res, next) => {
+//   res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+//   res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+//   next();
+// });
 
 app.use(`${apiVersion}/auth`, authRoutes);
 app.use(`${apiVersion}/blog`, blogRoutes);

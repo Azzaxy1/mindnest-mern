@@ -68,6 +68,28 @@ const fetchRegister = async (
   }
 };
 
+const fetchGoogleLogin = async (token: string) => {
+  try {
+    const res = await axios.post(`${blogUrl}/auth/google/callback`, {
+      code: token,
+    });
+
+    if (res.status === 200) {
+      Swal.fire({
+        title: "Login Success",
+        text: "Welcome to NexaBlog",
+        icon: "success",
+      });
+      console.log("token", res.data.token);
+      if (token) {
+        localStorage.setItem("token", res.data.token);
+      }
+    }
+  } catch (error) {
+    console.error("Error during Google login", error);
+  }
+};
+
 const fetchUserLogged = async () => {
   const res = await axios.get(`${blogUrl}/auth/me`, {
     headers: {
@@ -78,4 +100,4 @@ const fetchUserLogged = async () => {
   return res.data;
 };
 
-export { fetchLogin, fetchRegister, fetchUserLogged };
+export { fetchLogin, fetchRegister, fetchUserLogged, fetchGoogleLogin };

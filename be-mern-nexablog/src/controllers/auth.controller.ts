@@ -94,6 +94,7 @@ const googleOauthCallback: RequestHandler = async (
 ): Promise<void> => {
   try {
     const { code } = req.query;
+    console.log("query", req.query);
 
     if (!code) {
       res.status(400).json({ message: "Authorization code is missing" });
@@ -111,9 +112,7 @@ const googleOauthCallback: RequestHandler = async (
     const { data } = await oauth2.userinfo.get();
 
     if (!data.email) {
-      res.json({
-        data: data,
-      });
+      res.status(400).json({ message: "User info is missing" });
       return;
     }
 
@@ -129,13 +128,13 @@ const googleOauthCallback: RequestHandler = async (
 
     const token = await user.generateAuthToken();
 
-    // return res.redirect(`http//localhost:5173/google?token=${token}`);
+    res.redirect(`http://localhost:5173?token=${token}`);
 
-    res.status(200).json({
-      data: user,
-      token,
-    });
-    return;
+    // res.status(200).json({
+    //   data: user,
+    //   token,
+    // });
+    // return;
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

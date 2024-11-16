@@ -3,6 +3,7 @@ import { LoginBg } from "../../assets";
 import { Button, Gap, Input } from "../../components";
 import useInput from "../../hooks/useInput";
 import { fetchLogin } from "../../services/authService";
+import ButtonGoogle from "../../components/atoms/ButtonGoogle";
 
 const Login = () => {
   const [email, handleEmail] = useInput("");
@@ -14,6 +15,10 @@ const Login = () => {
     if (token) {
       localStorage.setItem("token", token);
     }
+  };
+
+  const handleLoginGoogle = async () => {
+    window.location.href = `${import.meta.env.VITE_URL_API}/auth/google`;
   };
 
   return (
@@ -46,6 +51,7 @@ const Login = () => {
         />
         <Gap height={30} />
         <Button title="Login" onClick={handleLogin} />
+        <ButtonGoogle onLoginGoogle={handleLoginGoogle} />
         <p className="link">
           Belum punya akun?{" "}
           <Link to="/register" className="redirect">

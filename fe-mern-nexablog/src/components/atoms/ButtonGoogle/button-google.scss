@@ -1,0 +1,24 @@
+.button-google {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0.25rem;
+  padding: 5px 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: #ffffff;
+  transition-duration: 75ms;
+  background-color: #dc2626;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #b91c1c;
+  }
+  &:focus {
+    outline: none;
+  }
+  border-radius: 8px;
+}
