@@ -15,7 +15,12 @@ const MainLayout = () => {
 
     if (token) {
       localStorage.setItem("token", token);
-      navigate("/"); // Redirect ke home
+      Swal.fire({
+        icon: "success",
+        title: "Login Success",
+        text: "Welcome to NexaBlog",
+      });
+      navigate("/");
     }
   }, [navigate]);
 
