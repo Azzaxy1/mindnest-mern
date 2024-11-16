@@ -12,7 +12,7 @@ Nexa Blog is a full-stack blogging application built using the MERN stack (Mongo
 - **Frontend:** React, Redux, React Router
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB, Mongoose
-- **Authentication:** JWT (JSON Web Tokens)
+- **Authentication:** JWT (JSON Web Tokens), Oauth Google
 - **Styling:** Sass
 
 ## Installation
