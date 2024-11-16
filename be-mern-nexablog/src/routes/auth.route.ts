@@ -1,7 +1,13 @@
 import express from "express";
 import { body } from "express-validator";
 
-import { getMe, login, register } from "../controllers/auth.controller";
+import {
+  getMe,
+  googleOauth,
+  googleOauthCallback,
+  login,
+  register,
+} from "../controllers/auth.controller";
 import authMiddleware from "../middleware/auth.middleware";
 
 const router = express.Router();
@@ -17,6 +23,7 @@ router.post(
   ],
   register
 );
+
 router.post(
   "/login",
   [
@@ -27,6 +34,12 @@ router.post(
   ],
   login
 );
+
+// Google Login
+router.get("/google", googleOauth);
+
+// Google Callback Login
+router.get("/google/callback", googleOauthCallback);
 
 router.get("/me", authMiddleware, getMe);
 

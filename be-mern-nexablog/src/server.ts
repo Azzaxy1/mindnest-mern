@@ -14,9 +14,12 @@ dotenv.config();
 
 const app: Application = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 const localhost = `http://localhost:${PORT}`;
 const apiVersion = "/v1";
+
+// console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
+// console.log("GOOGLE_CLIENT_SECRET:", process.env.GOOGLE_CLIENT_SECRET);
 
 connectDB();
 
