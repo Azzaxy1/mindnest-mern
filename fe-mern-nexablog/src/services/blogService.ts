@@ -3,12 +3,17 @@ import { updatedDataBlog } from "../config";
 import { Dispatch } from "redux";
 import { updatedPage } from "../config/redux/reducers/homeSlice";
 import { NavigateFunction } from "react-router-dom";
+import { getAccessToken } from "../utils";
 
 const blogUrl = `${import.meta.env.VITE_URL_API}`;
 
 const fetchBlogs = (dispatch: Dispatch, page: number, perPage: number) => {
   axios
-    .get(`${blogUrl}/blog?page=${page}&perPage=${perPage}`)
+    .get(`${blogUrl}/blog?page=${page}&perPage=${perPage}`, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    })
     .then((res) => {
       const response = res.data;
       dispatch(
@@ -28,6 +33,7 @@ const fetchAddBlog = (data: FormData, navigate: NavigateFunction) => {
     .post(`${blogUrl}/blog`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     })
     .then(() => {
@@ -40,7 +46,11 @@ const fetchAddBlog = (data: FormData, navigate: NavigateFunction) => {
 
 const fetchBlogById = async (id: string | undefined) => {
   try {
-    const res = await axios.get(`${blogUrl}/blog/${id}`);
+    const res = await axios.get(`${blogUrl}/blog/${id}`, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
     return res.data.data;
   } catch (err) {
     console.log("err: ", err);
@@ -56,6 +66,7 @@ const fetchUpdateBlog = async (
     await axios.put(`${blogUrl}/blog/${id}`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     });
     navigate("/");
@@ -66,7 +77,11 @@ const fetchUpdateBlog = async (
 
 const fetchDeleteBlog = async (id: string | undefined) => {
   try {
-    await axios.delete(`${blogUrl}/blog/${id}`);
+    await axios.delete(`${blogUrl}/blog/${id}`, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
   } catch (err) {
     console.log("err: ", err);
   }

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import { IBLog } from "../types/blog";
 
 const { Schema } = mongoose;
@@ -18,7 +18,8 @@ const blogSchema = new Schema(
       required: true,
     },
     author: {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
   },

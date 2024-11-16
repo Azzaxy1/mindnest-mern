@@ -8,12 +8,14 @@ import {
   getBlogById,
   updateBlog,
 } from "../controllers/blog.controller";
+import authMiddleware from "../middleware/auth.middleware";
 
 const router = express.Router();
 
 // Create -> POST
 router.post(
   "/",
+  authMiddleware,
   [
     body("title").isLength({ min: 5 }).withMessage("Input title tidak sesuai"),
     body("body").isLength({ min: 10 }).withMessage("Input body tidak sesuai"),
@@ -22,14 +24,15 @@ router.post(
 );
 
 // Read -> GET
-router.get("/", getAllBlogs);
+router.get("/", authMiddleware, getAllBlogs);
 
 // Get One -> GET
-router.get("/:id", getBlogById);
+router.get("/:id", authMiddleware, getBlogById);
 
 // Update -> PUT
 router.put(
   "/:id",
+  authMiddleware,
   [
     body("title").isLength({ min: 5 }).withMessage("Input title tidak sesuai"),
     body("body").isLength({ min: 10 }).withMessage("Input body tidak sesuai"),
@@ -38,6 +41,6 @@ router.put(
 );
 
 // Delete -> DELETE
-router.delete("/:id", deleteBlog);
+router.delete("/:id", authMiddleware, deleteBlog);
 
 export default router;

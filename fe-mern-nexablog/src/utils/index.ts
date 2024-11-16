@@ -6,3 +6,13 @@ export const formatedDate = (date: string) => {
   };
   return new Date(date).toLocaleDateString("id-ID", options);
 };
+
+const getAccessToken = () => {
+  return localStorage.getItem("token");
+};
+
+const addAccessToken = (token: string) => {
+  return localStorage.setItem("token", token);
+};
+
+export { getAccessToken, addAccessToken };

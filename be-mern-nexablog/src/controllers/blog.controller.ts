@@ -8,40 +8,41 @@ import { Blog } from "../models/blog.model";
 import { CustomError } from "../types/customError";
 
 const createBlog = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
+  try {
+    const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    const err: CustomError = new Error("Input tidak sesuai");
-    err.errorStatus = 400;
-    err.data = errors.array();
-    throw err;
+    if (!errors.isEmpty()) {
+      const err: CustomError = new Error("Input tidak sesuai");
+      err.errorStatus = 400;
+      err.data = errors.array();
+      throw err;
+    }
+
+    if (!req.file) {
+      const err: CustomError = new Error("Image harus diupload");
+      err.errorStatus = 422;
+      throw err;
+    }
+
+    const { title, body } = req?.body;
+    const image = req?.file?.path;
+
+    const newBlog = new Blog({
+      title,
+      image,
+      body,
+      author: req.user._id,
+    });
+
+    const savedBlog = await newBlog.save();
+
+    res.status(201).json({
+      message: "Create Blog Post Success",
+      data: savedBlog,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error });
   }
-
-  if (!req.file) {
-    const err: CustomError = new Error("Image harus diupload");
-    err.errorStatus = 422;
-    throw err;
-  }
-
-  const { title, body } = req?.body;
-  const image = req?.file?.path;
-
-  const newBlog = new Blog({
-    title,
-    image,
-    body,
-    author: {
-      uid: 1,
-      name: "Abdurrohman Azis",
-    },
-  });
-
-  const savedBlog = await newBlog.save();
-
-  res.status(201).json({
-    message: "Create Blog Post Success",
-    data: savedBlog,
-  });
 };
 
 const getAllBlogs = async (req: Request, res: Response, next: NextFunction) => {
@@ -49,9 +50,9 @@ const getAllBlogs = async (req: Request, res: Response, next: NextFunction) => {
     const currentPage = Number(req.query.page) || 1;
     const perPage = Number(req.query.perPage) || 5;
 
-    let totalItems = await Blog.countDocuments();
+    let totalItems = await Blog.countDocuments({ author: req.user._id });
 
-    const getBlogs = await Blog.find()
+    const getBlogs = await Blog.find({ author: req.user._id })
       .lean()
       .skip((currentPage - 1) * perPage)
       .limit(perPage);
@@ -72,7 +73,7 @@ const getBlogById = async (req: Request, res: Response, next: NextFunction) => {
   const blogId = req.params.id;
 
   try {
-    const getBlog = await Blog.findById(blogId);
+    const getBlog = await Blog.findOne({ _id: blogId, author: req.user._id });
 
     if (!getBlog) {
       const err: CustomError = new Error("Blog Post tidak ditemukan");
@@ -111,10 +112,7 @@ const updateBlog = async (req: Request, res: Response, next: NextFunction) => {
         title,
         body,
         image,
-        author: {
-          uid: 1,
-          name: "Abdurrohman Azis",
-        },
+        author: req.user._id,
       },
       { new: true }
     );

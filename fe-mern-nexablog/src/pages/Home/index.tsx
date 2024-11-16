@@ -10,6 +10,7 @@ import { fetchBlogs, fetchDeleteBlog } from "../../services/blogService";
 import { IHomeState } from "../../types/homeTypes";
 import { updatedPage } from "../../config";
 import "./home.scss";
+import { TbMoodEmptyFilled } from "react-icons/tb";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -89,9 +90,16 @@ const Home = () => {
       </div>
       <Gap height={20} />
       <div className="content-wrapper">
-        {dataBlogs.map((blog, index) => (
-          <BlogItem key={index} blog={blog} onDelete={handleDeleteBlog} />
-        ))}
+        {dataBlogs.length === 0 ? (
+          <div className="empty-data-wrapper">
+            <TbMoodEmptyFilled className="icon" />
+            <p className="empty-data-text">Data blog Kosong</p>
+          </div>
+        ) : (
+          dataBlogs.map((blog, index) => (
+            <BlogItem key={index} blog={blog} onDelete={handleDeleteBlog} />
+          ))
+        )}
       </div>
       <div className="pagination">
         <Button title="Previous" iconPosition="top" onClick={handlePrevPage}>
