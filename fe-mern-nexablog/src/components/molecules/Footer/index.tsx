@@ -58,7 +58,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-gray-800 text-center">
           <p className="text-gray-500 text-sm">
-            NexaBlog © {new Date().getFullYear()} • All rights reserved
+            Mindnest © {new Date().getFullYear()} • All rights reserved
           </p>
         </div>
       </div>

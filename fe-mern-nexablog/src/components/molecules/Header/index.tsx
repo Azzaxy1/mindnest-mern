@@ -15,7 +15,7 @@ const Header = ({ user, onLogout }: HeaderProps) => {
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center group">
             <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500 group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300">
-              Nexa<span className="text-white">Blog</span>
+              Mind<span className="text-white">nest</span>
             </h2>
           </Link>
 
