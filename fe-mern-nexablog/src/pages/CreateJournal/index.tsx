@@ -13,11 +13,11 @@ import Swal from "sweetalert2";
 import { resetForm } from "../../config/redux/reducers/createJournalSlice";
 import { TbArrowBack } from "react-icons/tb";
 
-interface ICreatejournalState {
-  createjournal: CreateJournalState;
+interface ICreateJournalState {
+  createJournal: CreateJournalState;
 }
 
-const Createjournal = () => {
+const CreateJournal = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -26,7 +26,7 @@ const Createjournal = () => {
   const dispatch = useDispatch();
 
   const { form } = useSelector(
-    (state: ICreatejournalState) => state.createjournal
+    (state: ICreateJournalState) => state.createJournal
   );
   const { title, body } = form;
 
@@ -182,4 +182,4 @@ const Createjournal = () => {
   );
 };
 
-export default Createjournal;
+export default CreateJournal;
