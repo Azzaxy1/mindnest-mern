@@ -20,9 +20,9 @@ const Register = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500 opacity-80"></div>
         <div className="absolute inset-0 flex items-center justify-center p-8 z-10">
           <div className="text-center">
-            <h1 className="text-5xl font-bold mb-4 text-white">NexaBlog</h1>
+            <h1 className="text-5xl font-bold mb-4 text-white">Mindnest</h1>
             <p className="text-xl text-white/80">
-              Join the future of content creation
+              Your private space to reflect, grow, and be yourself.
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4 opacity-70">
               {[...Array(9)].map((_, i) => (
@@ -45,9 +45,11 @@ const Register = () => {
         <div className="w-full max-w-md">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-indigo-500">
-              Create Account
+              Welcome to Mindnest
             </h2>
-            <p className="text-gray-400">Join NexaBlog's community today</p>
+            <p className="text-gray-400">
+              Start journaling your thoughts in a space that’s truly yours.
+            </p>
           </div>
 
           <div className="space-y-6">
@@ -105,7 +107,7 @@ const Register = () => {
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-gray-900 text-gray-400">
-                  Already have an account?
+                  Already part of Mindnest?
                 </span>
               </div>
             </div>
@@ -114,7 +116,7 @@ const Register = () => {
               to="/login"
               className="block w-full text-center px-4 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg border border-gray-700 transition-all"
             >
-              Sign in instead
+              Sign in to your space
             </Link>
           </div>
         </div>
