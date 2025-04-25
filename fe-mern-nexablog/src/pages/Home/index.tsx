@@ -44,14 +44,14 @@ const Home = () => {
 
   const handleDeleteBlog = (id: string) => {
     Swall.fire({
-      title: "Yakin ingin menghapus blog ini?",
-      text: "Blog yang sudah dihapus tidak dapat dikembalikan!",
+      title: "Are you sure you want to delete?",
+      text: "Once deleted, this journal entry cannot be recovered!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Hapus",
-      cancelButtonText: "Batal",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
       background: "#1f2937",
       color: "#fff",
     }).then((result) => {
@@ -59,10 +59,10 @@ const Home = () => {
         fetchDeleteBlog(id)
           .then(() => {
             Swall.fire({
-              title: "Dihapus!",
-              text: "Blog berhasil dihapus",
+              title: "Deleted!",
+              text: "Your journal entry has been successfully deleted.",
               icon: "success",
-              confirmButtonText: "Oke",
+              confirmButtonText: "Okay",
               background: "#1f2937",
               color: "#fff",
             });
@@ -71,10 +71,10 @@ const Home = () => {
           .catch((err) => {
             console.log("err:", err);
             Swall.fire({
-              title: "Gagal!",
-              text: "Blog gagal dihapus",
+              title: "Failed!",
+              text: "There was an error deleting the journal entry.",
               icon: "error",
-              confirmButtonText: "Oke",
+              confirmButtonText: "Okay",
               background: "#1f2937",
               color: "#fff",
             });

@@ -76,10 +76,11 @@ const CreateBlog = () => {
     if (imageFile) {
       formData.append("image", imageFile);
     }
+
     if (isUpdate) {
       Swal.fire({
         title: "Update Journal!",
-        text: "Successfully updated the journal",
+        text: "Journal has been successfully updated.",
         icon: "success",
         confirmButtonText: "Okay",
       });
@@ -87,7 +88,7 @@ const CreateBlog = () => {
     } else {
       Swal.fire({
         title: "Create Journal!",
-        text: "Successfully created the journal",
+        text: "Journal has been successfully created.",
         icon: "success",
         confirmButtonText: "Okay",
       });
