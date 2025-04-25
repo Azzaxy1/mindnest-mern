@@ -17,7 +17,7 @@ const MainLayout = () => {
       Swal.fire({
         icon: "success",
         title: "Login Success",
-        text: "Welcome to NexaBlog",
+        text: "Welcome to Mindnest",
       });
       navigate("/");
     }
@@ -51,7 +51,7 @@ const MainLayout = () => {
     Swal.fire({
       icon: "success",
       title: "Logout Success",
-      text: "Thank you for using NexaBlog",
+      text: "Thank you for using Mindnest",
     });
   };
 

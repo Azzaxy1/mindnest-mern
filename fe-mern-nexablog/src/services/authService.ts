@@ -19,7 +19,7 @@ const fetchLogin = async (
       Swal.fire({
         icon: "success",
         title: "Login Success",
-        text: "Welcome to NexaBlog",
+        text: "Welcome to Mindnest",
       });
       navigate("/");
     }
@@ -77,7 +77,7 @@ const fetchGoogleLogin = async (token: string) => {
     if (res.status === 200) {
       Swal.fire({
         title: "Login Success",
-        text: "Welcome to NexaBlog",
+        text: "Welcome to Mindnest",
         icon: "success",
       });
       console.log("token", res.data.token);

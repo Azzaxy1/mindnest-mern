@@ -78,18 +78,18 @@ const CreateBlog = () => {
     }
     if (isUpdate) {
       Swal.fire({
-        title: "Update Blog!",
-        text: "Berhasil mengubah blog",
+        title: "Update Journal!",
+        text: "Successfully updated the journal",
         icon: "success",
-        confirmButtonText: "Oke",
+        confirmButtonText: "Okay",
       });
       fetchUpdateBlog(id, formData, navigate);
     } else {
       Swal.fire({
-        title: "Create Blog!",
-        text: "Berhasil membuat blog",
+        title: "Create Journal!",
+        text: "Successfully created the journal",
         icon: "success",
-        confirmButtonText: "Oke",
+        confirmButtonText: "Okay",
       });
       fetchAddBlog(formData, navigate);
     }
@@ -105,10 +105,10 @@ const CreateBlog = () => {
             className="flex items-center text-gray-400 cursor-pointer hover:text-white transition-colors duration-300"
           >
             <TbArrowBack className="mr-2 text-xl" />
-            <span>Back</span>
+            <span>Go Back</span>
           </button>
           <h1 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
-            {isUpdate ? "Update" : "Create New"} Blog Post
+            {isUpdate ? "Update" : "Create New"} Journal Entry
           </h1>
           <div className="w-8"></div> {/* Spacer for alignment */}
         </div>
@@ -118,9 +118,9 @@ const CreateBlog = () => {
           {/* Title Input */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-300 mb-2">
-              Title
+              Journal Title
               <span className="text-xs text-gray-500 block mt-1">
-                Write your blog title
+                Give your journal entry a meaningful title
               </span>
             </label>
             <Input
@@ -128,9 +128,9 @@ const CreateBlog = () => {
               onChange={(e) =>
                 dispatch(setUpdatedForm({ ...form, title: e.target.value }))
               }
-              name="blog-title"
+              name="journal-title"
               className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white"
-              placeholder="Enter blog title"
+              placeholder="Enter journal title"
             />
           </div>
 
@@ -139,7 +139,7 @@ const CreateBlog = () => {
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Featured Image
               <span className="text-xs text-gray-500 block mt-1">
-                Upload or change the image
+                Upload a featured image for your entry
               </span>
             </label>
             <Upload
@@ -154,7 +154,7 @@ const CreateBlog = () => {
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Content
               <span className="text-xs text-gray-500 block mt-1">
-                Write your blog content
+                Share your thoughts and reflections
               </span>
             </label>
             <TextArea
@@ -163,13 +163,13 @@ const CreateBlog = () => {
                 dispatch(setUpdatedForm({ ...form, body: e.target.value }))
               }
               className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white min-h-[200px]"
-              placeholder="Write your blog content here..."
+              placeholder="Write your journal content here..."
             />
           </div>
 
           {/* Submit Button */}
           <Button
-            title={isUpdate ? "Update Post" : "Publish Post"}
+            title={isUpdate ? "Update Entry" : "Publish Entry"}
             onClick={handleSubmit}
             className="w-full py-3 px-4 bg-gradient-to-r cursor-pointer from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
           />
