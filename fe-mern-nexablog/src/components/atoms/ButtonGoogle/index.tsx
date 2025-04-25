@@ -1,5 +1,4 @@
 import GoggleLogo from "../../../assets/icon/google.svg";
-import "./button-google.scss";
 
 interface ButtonGoogleProps {
   onLoginGoogle: () => void;
@@ -7,7 +6,10 @@ interface ButtonGoogleProps {
 
 const ButtonGoogle = ({ onLoginGoogle }: ButtonGoogleProps) => {
   return (
-    <button className="button-google" onClick={onLoginGoogle}>
+    <button
+      className="w-full flex items-center cursor-pointer justify-center px-4 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg border border-gray-700 transition-all"
+      onClick={onLoginGoogle}
+    >
       <img src={GoggleLogo} alt="google" />
       <span>Login with Google</span>
     </button>

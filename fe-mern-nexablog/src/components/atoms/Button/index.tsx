@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import "./button.scss";
 
 type ButtonProps = {
   title?: string;
@@ -14,7 +13,7 @@ const Button = ({
   ...rest
 }: ButtonProps) => {
   return (
-    <button className="button" {...rest}>
+    <button {...rest}>
       {iconPosition === "top" && children}
       {title}
       {iconPosition === "bottom" && children}

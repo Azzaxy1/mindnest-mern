@@ -93,12 +93,15 @@ const CreateBlog = () => {
         </Button>
       </div>
       <p className="title">{isUpdate ? "Update" : "Create New"} Blog Post</p>
+      <label htmlFor="create-blog">
+        <p className="label">Title</p>
+        <span className="desc">Write your blog title</span>
+      </label>
       <Input
         value={title}
         onChange={(e) =>
           dispatch(setUpdatedForm({ ...form, title: e.target.value }))
         }
-        label="Post Title"
         name="create-blog"
       />
       <Upload onChange={handleFileChange} image={previewUrl} />
