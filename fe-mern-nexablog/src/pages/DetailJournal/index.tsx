@@ -1,18 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchBlogById } from "../../services/blogService";
+import { fetchjournalById } from "../../services/journalService";
 import { formatedDate } from "../../utils";
-import { IBLog } from "../../types/blogTypes";
+import { IJournal } from "../../types/journalTypes";
 import { TbArrowBack } from "react-icons/tb";
 
-const DetailBlog = () => {
-  const [blog, setBlog] = useState<IBLog | null>(null);
+const Detailjournal = () => {
+  const [journal, setjournal] = useState<IJournal | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchBlogById(id).then((res) => {
-      setBlog(res);
+    fetchjournalById(id).then((res) => {
+      setjournal(res);
     });
   }, [id]);
 
@@ -28,32 +28,32 @@ const DetailBlog = () => {
           <span>Kembali</span>
         </button>
 
-        {/* Blog Content */}
+        {/* journal Content */}
         <div className="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 shadow-2xl">
-          {/* Blog Image */}
+          {/* journal Image */}
           <div className="relative h-80 md:h-96 w-full overflow-hidden">
             <img
               className="w-full h-full object-cover"
-              src={`${import.meta.env.VITE_URL_ROOT}/${blog?.image}`}
-              alt={blog?.title}
+              src={`${import.meta.env.VITE_URL_ROOT}/${journal?.image}`}
+              alt={journal?.title}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-gray-900/30 to-transparent" />
           </div>
 
-          {/* Blog Details */}
+          {/* journal Details */}
           <div className="p-6 md:p-8">
             <div className="mb-6">
               <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white">
-                {blog?.title}
+                {journal?.title}
               </h1>
               <p className="text-gray-400">
-                {blog?.createdAt && formatedDate(blog?.createdAt)}
+                {journal?.createdAt && formatedDate(journal?.createdAt)}
               </p>
             </div>
 
             <article className="prose prose-invert max-w-none">
               <p className="text-lg leading-relaxed text-gray-300 whitespace-pre-line">
-                {blog?.body}
+                {journal?.body}
               </p>
             </article>
           </div>
@@ -74,4 +74,4 @@ const DetailBlog = () => {
   );
 };
 
-export default DetailBlog;
+export default Detailjournal;

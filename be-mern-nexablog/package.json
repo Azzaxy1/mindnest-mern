@@ -1,9 +1,9 @@
 {
-  "name": "be-mern-nexablog",
+  "name": "be-mern-nexajournal",
   "version": "1.0.0",
   "description": "REST API Express.JS (MERN STACK)",
   "main": "server.ts",
-  "repository": "https://github.com/Azzaxy1/mern-nexablog",
+  "repository": "https://github.com/Azzaxy1/mern-nexajournal",
   "author": "Azzaxy <abdurrohmanazis@gmail.com>",
   "license": "MIT",
   "scripts": {

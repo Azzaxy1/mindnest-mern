@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CreateBlogState } from "../../../types/createBlogTypes";
+import { CreateJournalState } from "../../../types/createJournalTypes";
 
-const initialState: CreateBlogState = {
+const initialState: CreateJournalState = {
   form: {
     title: "",
     body: "",
@@ -9,8 +9,8 @@ const initialState: CreateBlogState = {
   },
 };
 
-const createBlogSlice = createSlice({
-  name: "createBlog",
+const createJournalSlice = createSlice({
+  name: "createJournal",
   initialState,
   reducers: {
     setUpdatedForm: (
@@ -29,6 +29,6 @@ const createBlogSlice = createSlice({
   },
 });
 
-export const { setUpdatedForm, resetForm } = createBlogSlice.actions;
+export const { setUpdatedForm, resetForm } = createJournalSlice.actions;
 
-export default createBlogSlice.reducer;
+export default createJournalSlice.reducer;

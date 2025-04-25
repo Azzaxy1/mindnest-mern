@@ -1,15 +1,15 @@
 import axios from "axios";
-import { updatedDataBlog } from "../config";
+import { updatedDataJournal } from "../config";
 import { Dispatch } from "redux";
 import { updatedPage } from "../config/redux/reducers/homeSlice";
 import { NavigateFunction } from "react-router-dom";
 import { getAccessToken } from "../utils";
 
-const blogUrl = `${import.meta.env.VITE_URL_API}`;
+const journalUrl = `${import.meta.env.VITE_URL_API}`;
 
-const fetchBlogs = (dispatch: Dispatch, page: number, perPage: number) => {
+const fetchjournals = (dispatch: Dispatch, page: number, perPage: number) => {
   axios
-    .get(`${blogUrl}/blog?page=${page}&perPage=${perPage}`, {
+    .get(`${journalUrl}/journal?page=${page}&perPage=${perPage}`, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },
@@ -22,15 +22,15 @@ const fetchBlogs = (dispatch: Dispatch, page: number, perPage: number) => {
           totalPage: Math.ceil(response.total_data / response.per_page),
         })
       );
-      dispatch(updatedDataBlog(response.data));
+      dispatch(updatedDataJournal(response.data));
     })
     .catch((err) => {
       console.log("error:", err);
     });
 };
-const fetchAddBlog = (data: FormData, navigate: NavigateFunction) => {
+const fetchAddjournal = (data: FormData, navigate: NavigateFunction) => {
   axios
-    .post(`${blogUrl}/blog`, data, {
+    .post(`${journalUrl}/journal`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${getAccessToken()}`,
@@ -44,9 +44,9 @@ const fetchAddBlog = (data: FormData, navigate: NavigateFunction) => {
     });
 };
 
-const fetchBlogById = async (id: string | undefined) => {
+const fetchjournalById = async (id: string | undefined) => {
   try {
-    const res = await axios.get(`${blogUrl}/blog/${id}`, {
+    const res = await axios.get(`${journalUrl}/journal/${id}`, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },
@@ -57,13 +57,13 @@ const fetchBlogById = async (id: string | undefined) => {
   }
 };
 
-const fetchUpdateBlog = async (
+const fetchUpdatejournal = async (
   id: string | undefined,
   data: FormData,
   navigate: NavigateFunction
 ) => {
   try {
-    await axios.put(`${blogUrl}/blog/${id}`, data, {
+    await axios.put(`${journalUrl}/journal/${id}`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${getAccessToken()}`,
@@ -75,9 +75,9 @@ const fetchUpdateBlog = async (
   }
 };
 
-const fetchDeleteBlog = async (id: string | undefined) => {
+const fetchDeletejournal = async (id: string | undefined) => {
   try {
-    await axios.delete(`${blogUrl}/blog/${id}`, {
+    await axios.delete(`${journalUrl}/journal/${id}`, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },
@@ -88,9 +88,9 @@ const fetchDeleteBlog = async (id: string | undefined) => {
 };
 
 export {
-  fetchBlogs,
-  fetchAddBlog,
-  fetchUpdateBlog,
-  fetchBlogById,
-  fetchDeleteBlog,
+  fetchjournals,
+  fetchAddjournal,
+  fetchUpdatejournal,
+  fetchjournalById,
+  fetchDeletejournal,
 };

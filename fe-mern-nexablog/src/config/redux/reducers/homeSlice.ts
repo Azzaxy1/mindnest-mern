@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IBLog } from "../../../types/blogTypes";
+import { IJournal } from "../../../types/journalTypes";
 
 interface HomeState {
-  dataBlogs: IBLog[];
+  dataJournals: IJournal[];
   page: {
     currentPage: number;
     totalPage: number;
@@ -10,7 +10,7 @@ interface HomeState {
 }
 
 const initialState: HomeState = {
-  dataBlogs: [],
+  dataJournals: [],
   page: {
     currentPage: 1,
     totalPage: 1,
@@ -21,8 +21,8 @@ export const homeSlice = createSlice({
   name: "home",
   initialState,
   reducers: {
-    updatedDataBlog: (state, action: PayloadAction<IBLog[]>) => {
-      state.dataBlogs = action.payload;
+    updatedDataJournal: (state, action: PayloadAction<IJournal[]>) => {
+      state.dataJournals = action.payload;
     },
     updatedPage: (
       state,
@@ -33,6 +33,6 @@ export const homeSlice = createSlice({
   },
 });
 
-export const { updatedDataBlog, updatedPage } = homeSlice.actions;
+export const { updatedDataJournal, updatedPage } = homeSlice.actions;
 
 export default homeSlice.reducer;

@@ -1,4 +1,4 @@
-import { IBLog } from "./blogTypes";
+import { IJournal } from "./journalTypes";
 
 export interface IGlobalState {
   global: {
@@ -8,7 +8,7 @@ export interface IGlobalState {
 
 export interface IHomeState {
   home: {
-    dataBlogs: IBLog[];
+    dataJournals: IJournal[];
     page: {
       currentPage: number;
       totalPage: number;

@@ -4,8 +4,11 @@ import { useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Swall from "sweetalert2";
-import { BlogItem } from "../../components";
-import { fetchBlogs, fetchDeleteBlog } from "../../services/blogService";
+import { JournalItem } from "../../components";
+import {
+  fetchjournals,
+  fetchDeletejournal,
+} from "../../services/journalService";
 import { IHomeState } from "../../types/homeTypes";
 import { updatedPage } from "../../config";
 import { TbMoodEmptyFilled } from "react-icons/tb";
@@ -14,10 +17,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const perPage = 6;
 
-  const { dataBlogs, page } = useSelector((state: IHomeState) => state.home);
+  const { dataJournals, page } = useSelector((state: IHomeState) => state.home);
 
   useEffect(() => {
-    fetchBlogs(dispatch, page.currentPage, perPage);
+    fetchjournals(dispatch, page.currentPage, perPage);
   }, [dispatch, page.currentPage, perPage]);
 
   const handlePrevPage = () => {
@@ -42,7 +45,7 @@ const Home = () => {
     }
   };
 
-  const handleDeleteBlog = (id: string) => {
+  const handleDeletejournal = (id: string) => {
     Swall.fire({
       title: "Are you sure you want to delete?",
       text: "Once deleted, this journal entry cannot be recovered!",
@@ -56,7 +59,7 @@ const Home = () => {
       color: "#fff",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetchDeleteBlog(id)
+        fetchDeletejournal(id)
           .then(() => {
             Swall.fire({
               title: "Deleted!",
@@ -66,7 +69,7 @@ const Home = () => {
               background: "#1f2937",
               color: "#fff",
             });
-            fetchBlogs(dispatch, page.currentPage, perPage);
+            fetchjournals(dispatch, page.currentPage, perPage);
           })
           .catch((err) => {
             console.log("err:", err);
@@ -85,10 +88,10 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white py-8 px-4 sm:px-6 lg:px-8">
-      {/* Create Blog Button */}
+      {/* Create journal Button */}
       <div className="flex justify-end mb-8">
         <Link
-          to="/create-blog"
+          to="/create-journal"
           className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
         >
           <FaPlus className="mr-2" />
@@ -96,9 +99,9 @@ const Home = () => {
         </Link>
       </div>
 
-      {/* Blog Content */}
+      {/* journal Content */}
       <div className="mb-12">
-        {dataBlogs.length === 0 ? (
+        {dataJournals.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <TbMoodEmptyFilled className="text-6xl text-gray-500 mb-4" />
             <h3 className="text-2xl font-medium text-gray-300 mb-2">
@@ -110,11 +113,11 @@ const Home = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {dataBlogs.map((blog, index) => (
-              <BlogItem
+            {dataJournals.map((journal, index) => (
+              <JournalItem
                 key={index}
-                blog={blog}
-                onDelete={handleDeleteBlog}
+                journal={journal}
+                onDelete={handleDeletejournal}
                 className="bg-gray-800 rounded-xl border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:shadow-lg"
               />
             ))}

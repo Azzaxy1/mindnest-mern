@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Error, Home, Login, Register } from "./pages";
-import CreateBlog from "./pages/CreateBlog";
-import DetailBlog from "./pages/DetailBlog";
+import CreateJournal from "./pages/CreateJournal";
+import DetailJournal from "./pages/DetailJournal";
 import { MainLayout } from "./components";
 
 const App = () => {
@@ -11,8 +11,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index Component={Home} />
-            <Route path="/create-blog/:id?" Component={CreateBlog} />
-            <Route path="/detail-blog/:id" Component={DetailBlog} />
+            <Route path="/create-journal/:id?" Component={CreateJournal} />
+            <Route path="/detail-journal/:id" Component={DetailJournal} />
           </Route>
           <Route path="/login" Component={Login} />
           <Route path="/register" Component={Register} />

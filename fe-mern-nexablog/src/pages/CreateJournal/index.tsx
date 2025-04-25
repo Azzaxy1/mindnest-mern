@@ -2,22 +2,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button, Input, TextArea, Upload } from "../../components";
 import {
-  fetchAddBlog,
-  fetchBlogById,
-  fetchUpdateBlog,
-} from "../../services/blogService";
+  fetchAddjournal,
+  fetchjournalById,
+  fetchUpdatejournal,
+} from "../../services/journalService";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpdatedForm } from "../../config";
-import { CreateBlogState } from "../../types/createBlogTypes";
+import { CreateJournalState } from "../../types/createJournalTypes";
 import Swal from "sweetalert2";
-import { resetForm } from "../../config/redux/reducers/createBlogSlice";
+import { resetForm } from "../../config/redux/reducers/createJournalSlice";
 import { TbArrowBack } from "react-icons/tb";
 
-interface ICreateBLogState {
-  createBlog: CreateBlogState;
+interface ICreatejournalState {
+  createjournal: CreateJournalState;
 }
 
-const CreateBlog = () => {
+const Createjournal = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -25,13 +25,15 @@ const CreateBlog = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { form } = useSelector((state: ICreateBLogState) => state.createBlog);
+  const { form } = useSelector(
+    (state: ICreatejournalState) => state.createjournal
+  );
   const { title, body } = form;
 
   useEffect(() => {
     if (id) {
       setIsUpdate(true);
-      fetchBlogById(id).then((data) => {
+      fetchjournalById(id).then((data) => {
         setPreviewUrl(`${import.meta.env.VITE_URL_ROOT}/${data.image}`);
         dispatch(
           setUpdatedForm({
@@ -84,7 +86,7 @@ const CreateBlog = () => {
         icon: "success",
         confirmButtonText: "Okay",
       });
-      fetchUpdateBlog(id, formData, navigate);
+      fetchUpdatejournal(id, formData, navigate);
     } else {
       Swal.fire({
         title: "Create Journal!",
@@ -92,7 +94,7 @@ const CreateBlog = () => {
         icon: "success",
         confirmButtonText: "Okay",
       });
-      fetchAddBlog(formData, navigate);
+      fetchAddjournal(formData, navigate);
     }
   };
 
@@ -180,4 +182,4 @@ const CreateBlog = () => {
   );
 };
 
-export default CreateBlog;
+export default Createjournal;

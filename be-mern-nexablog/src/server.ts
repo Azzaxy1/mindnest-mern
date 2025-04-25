@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import multer from "multer";
 import cors from "cors";
 
-import blogRoutes from "./routes/blog.route";
+import journalRoutes from "./routes/journal.route";
 import authRoutes from "./routes/auth.route";
 import connectDB from "./config/db.config";
 import { CustomError } from "./types/customError";
@@ -73,7 +73,7 @@ app.use(
 // });
 
 app.use(`${apiVersion}/auth`, authRoutes);
-app.use(`${apiVersion}/blog`, blogRoutes);
+app.use(`${apiVersion}/journal`, journalRoutes);
 app.use(
   (error: CustomError, _req: Request, res: Response, _next: NextFunction) => {
     const status = error.errorStatus || 500;

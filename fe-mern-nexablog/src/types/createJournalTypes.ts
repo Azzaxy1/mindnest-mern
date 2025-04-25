@@ -1,4 +1,4 @@
-interface CreateBlogState {
+interface CreateJournalState {
   form: {
     title: string;
     body: string;
@@ -6,4 +6,4 @@ interface CreateBlogState {
   };
 }
 
-export type { CreateBlogState };
+export type { CreateJournalState };

@@ -3,7 +3,7 @@ interface IAuthor {
   name: string;
 }
 
-export interface IBLog {
+export interface IJournal {
   _id: string;
   title: string;
   image: string;
@@ -14,7 +14,7 @@ export interface IBLog {
   __v: number;
 }
 
-export interface Blog {
+export interface Journal {
   title: string;
   image: string;
   body: string;

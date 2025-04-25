@@ -1,9 +1,9 @@
 import mongoose, { mongo } from "mongoose";
-import { IBLog } from "../types/blog";
+import { IJournal } from "../types/journal";
 
 const { Schema } = mongoose;
 
-const blogSchema = new Schema(
+const journalSchema = new Schema(
   {
     title: {
       type: String,
@@ -28,4 +28,4 @@ const blogSchema = new Schema(
   }
 );
 
-export const Blog = mongoose.model<IBLog>("BlogPost", blogSchema);
+export const Journal = mongoose.model<IJournal>("journalPost", journalSchema);

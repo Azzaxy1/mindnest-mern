@@ -2,14 +2,14 @@ import axios from "axios";
 import { NavigateFunction } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const blogUrl = `${import.meta.env.VITE_URL_API}`;
+const journalUrl = `${import.meta.env.VITE_URL_API}`;
 
 const fetchLogin = async (
   data: { email: string; password: string },
   navigate: NavigateFunction
 ) => {
   try {
-    const res = await axios.post(`${blogUrl}/auth/login`, data, {
+    const res = await axios.post(`${journalUrl}/auth/login`, data, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -43,7 +43,7 @@ const fetchRegister = async (
   navigate: NavigateFunction
 ) => {
   try {
-    const res = await axios.post(`${blogUrl}/auth/register`, data, {
+    const res = await axios.post(`${journalUrl}/auth/register`, data, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -70,7 +70,7 @@ const fetchRegister = async (
 
 const fetchGoogleLogin = async (token: string) => {
   try {
-    const res = await axios.post(`${blogUrl}/auth/google/callback`, {
+    const res = await axios.post(`${journalUrl}/auth/google/callback`, {
       code: token,
     });
 
@@ -91,7 +91,7 @@ const fetchGoogleLogin = async (token: string) => {
 };
 
 const fetchUserLogged = async () => {
-  const res = await axios.get(`${blogUrl}/auth/me`, {
+  const res = await axios.get(`${journalUrl}/auth/me`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
