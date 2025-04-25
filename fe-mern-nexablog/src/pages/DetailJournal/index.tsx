@@ -1,18 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchjournalById } from "../../services/journalService";
+import { fetchJournalById } from "../../services/journalService";
 import { formatedDate } from "../../utils";
 import { IJournal } from "../../types/journalTypes";
 import { TbArrowBack } from "react-icons/tb";
 
-const Detailjournal = () => {
-  const [journal, setjournal] = useState<IJournal | null>(null);
+const DetailJournal = () => {
+  const [journal, setJournal] = useState<IJournal | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchjournalById(id).then((res) => {
-      setjournal(res);
+    fetchJournalById(id).then((res) => {
+      setJournal(res);
     });
   }, [id]);
 
@@ -74,4 +74,4 @@ const Detailjournal = () => {
   );
 };
 
-export default Detailjournal;
+export default DetailJournal;

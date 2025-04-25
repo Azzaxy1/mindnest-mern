@@ -7,7 +7,7 @@ import { getAccessToken } from "../utils";
 
 const journalUrl = `${import.meta.env.VITE_URL_API}`;
 
-const fetchjournals = (dispatch: Dispatch, page: number, perPage: number) => {
+const fetchJournals = (dispatch: Dispatch, page: number, perPage: number) => {
   axios
     .get(`${journalUrl}/journal?page=${page}&perPage=${perPage}`, {
       headers: {
@@ -28,7 +28,7 @@ const fetchjournals = (dispatch: Dispatch, page: number, perPage: number) => {
       console.log("error:", err);
     });
 };
-const fetchAddjournal = (data: FormData, navigate: NavigateFunction) => {
+const fetchAddJournal = (data: FormData, navigate: NavigateFunction) => {
   axios
     .post(`${journalUrl}/journal`, data, {
       headers: {
@@ -44,7 +44,7 @@ const fetchAddjournal = (data: FormData, navigate: NavigateFunction) => {
     });
 };
 
-const fetchjournalById = async (id: string | undefined) => {
+const fetchJournalById = async (id: string | undefined) => {
   try {
     const res = await axios.get(`${journalUrl}/journal/${id}`, {
       headers: {
@@ -57,7 +57,7 @@ const fetchjournalById = async (id: string | undefined) => {
   }
 };
 
-const fetchUpdatejournal = async (
+const fetchUpdateJournal = async (
   id: string | undefined,
   data: FormData,
   navigate: NavigateFunction
@@ -75,7 +75,7 @@ const fetchUpdatejournal = async (
   }
 };
 
-const fetchDeletejournal = async (id: string | undefined) => {
+const fetchDeleteJournal = async (id: string | undefined) => {
   try {
     await axios.delete(`${journalUrl}/journal/${id}`, {
       headers: {
@@ -88,9 +88,9 @@ const fetchDeletejournal = async (id: string | undefined) => {
 };
 
 export {
-  fetchjournals,
-  fetchAddjournal,
-  fetchUpdatejournal,
-  fetchjournalById,
-  fetchDeletejournal,
+  fetchJournals,
+  fetchAddJournal,
+  fetchUpdateJournal,
+  fetchJournalById,
+  fetchDeleteJournal,
 };

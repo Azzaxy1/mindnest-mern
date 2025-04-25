@@ -2,9 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button, Input, TextArea, Upload } from "../../components";
 import {
-  fetchAddjournal,
-  fetchjournalById,
-  fetchUpdatejournal,
+  fetchAddJournal,
+  fetchJournalById,
+  fetchUpdateJournal,
 } from "../../services/journalService";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpdatedForm } from "../../config";
@@ -33,7 +33,7 @@ const CreateJournal = () => {
   useEffect(() => {
     if (id) {
       setIsUpdate(true);
-      fetchjournalById(id).then((data) => {
+      fetchJournalById(id).then((data) => {
         setPreviewUrl(`${import.meta.env.VITE_URL_ROOT}/${data.image}`);
         dispatch(
           setUpdatedForm({
@@ -86,7 +86,7 @@ const CreateJournal = () => {
         icon: "success",
         confirmButtonText: "Okay",
       });
-      fetchUpdatejournal(id, formData, navigate);
+      fetchUpdateJournal(id, formData, navigate);
     } else {
       Swal.fire({
         title: "Create Journal!",
@@ -94,7 +94,7 @@ const CreateJournal = () => {
         icon: "success",
         confirmButtonText: "Okay",
       });
-      fetchAddjournal(formData, navigate);
+      fetchAddJournal(formData, navigate);
     }
   };
 
@@ -123,7 +123,7 @@ const CreateJournal = () => {
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Journal Title
               <span className="text-xs text-gray-500 block mt-1">
-                Give your journal entry a meaningful title
+                Give your Journal entry a meaningful title
               </span>
             </label>
             <Input
@@ -133,7 +133,7 @@ const CreateJournal = () => {
               }
               name="journal-title"
               className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white"
-              placeholder="Enter journal title"
+              placeholder="Enter Journal title"
             />
           </div>
 

@@ -6,8 +6,8 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import Swall from "sweetalert2";
 import { JournalItem } from "../../components";
 import {
-  fetchjournals,
-  fetchDeletejournal,
+  fetchJournals,
+  fetchDeleteJournal,
 } from "../../services/journalService";
 import { IHomeState } from "../../types/homeTypes";
 import { updatedPage } from "../../config";
@@ -20,7 +20,7 @@ const Home = () => {
   const { dataJournals, page } = useSelector((state: IHomeState) => state.home);
 
   useEffect(() => {
-    fetchjournals(dispatch, page.currentPage, perPage);
+    fetchJournals(dispatch, page.currentPage, perPage);
   }, [dispatch, page.currentPage, perPage]);
 
   const handlePrevPage = () => {
@@ -45,7 +45,7 @@ const Home = () => {
     }
   };
 
-  const handleDeletejournal = (id: string) => {
+  const handleDeleteJournal = (id: string) => {
     Swall.fire({
       title: "Are you sure you want to delete?",
       text: "Once deleted, this journal entry cannot be recovered!",
@@ -59,7 +59,7 @@ const Home = () => {
       color: "#fff",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetchDeletejournal(id)
+        fetchDeleteJournal(id)
           .then(() => {
             Swall.fire({
               title: "Deleted!",
@@ -69,7 +69,7 @@ const Home = () => {
               background: "#1f2937",
               color: "#fff",
             });
-            fetchjournals(dispatch, page.currentPage, perPage);
+            fetchJournals(dispatch, page.currentPage, perPage);
           })
           .catch((err) => {
             console.log("err:", err);
@@ -117,7 +117,7 @@ const Home = () => {
               <JournalItem
                 key={index}
                 journal={journal}
-                onDelete={handleDeletejournal}
+                onDelete={handleDeleteJournal}
                 className="bg-gray-800 rounded-xl border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:shadow-lg"
               />
             ))}
