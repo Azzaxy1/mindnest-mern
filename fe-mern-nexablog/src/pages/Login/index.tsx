@@ -105,12 +105,12 @@ const Login = () => {
             <ButtonGoogle onLoginGoogle={handleLoginGoogle} />
 
             <p className="text-center text-gray-400">
-              Don't have an account?{" "}
+              First time journaling?{" "}
               <Link
                 to="/register"
                 className="text-blue-400 hover:text-blue-300 font-medium"
               >
-                Sign up
+                Start your journal
               </Link>
             </p>
           </div>
