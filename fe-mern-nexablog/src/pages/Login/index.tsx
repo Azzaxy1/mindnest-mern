@@ -27,9 +27,9 @@ const Login = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-blue-500 to-teal-400 opacity-80"></div>
         <div className="absolute inset-0 flex items-center justify-center p-8 z-10">
           <div className="text-center">
-            <h1 className="text-5xl font-bold mb-4 text-white">NexaBlog</h1>
+            <h1 className="text-5xl font-bold mb-4 text-white">Mindnest</h1>
             <p className="text-xl text-white/80">
-              Where ideas meet the future of content
+              Your private space to reflect, write, and grow
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4 opacity-70">
               {[...Array(9)].map((_, i) => (
@@ -52,7 +52,7 @@ const Login = () => {
               Welcome Back
             </h2>
             <p className="text-gray-400">
-              Login to access your NexaBlog account
+              Login to continue your personal journaling journey
             </p>
           </div>
 
