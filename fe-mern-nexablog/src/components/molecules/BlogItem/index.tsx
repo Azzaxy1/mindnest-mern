@@ -53,7 +53,7 @@ const BlogItem = ({ blog, onDelete, className = "" }: BlogProps) => {
       {/* Blog Content */}
       <div className="flex-1 p-6 bg-gray-800 border border-gray-700 border-t-0 rounded-b-lg">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-semibold text-white line-clamp-2">
+          <h3 className="text-xl font-semibold text-white line-clamp-1">
             {blog.title}
           </h3>
         </div>

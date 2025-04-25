@@ -22,7 +22,7 @@ const DetailBlog = () => {
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center text-gray-400 hover:text-white mb-8 transition-colors duration-300"
+          className="flex items-center text-gray-400 cursor-pointer hover:text-white mb-8 transition-colors duration-300"
         >
           <TbArrowBack className="mr-2" />
           <span>Kembali</span>
@@ -47,7 +47,6 @@ const DetailBlog = () => {
                 {blog?.title}
               </h1>
               <p className="text-gray-400">
-                Oleh {blog?.author?.name} •{" "}
                 {blog?.createdAt && formatedDate(blog?.createdAt)}
               </p>
             </div>
