@@ -5,11 +5,11 @@ import { updatedPage } from "../config/redux/reducers/homeSlice";
 import { NavigateFunction } from "react-router-dom";
 import { getAccessToken } from "../utils";
 
-const journalUrl = `${import.meta.env.VITE_URL_API}`;
+const apiUrl = `${import.meta.env.VITE_URL_API}`;
 
 const fetchJournals = (dispatch: Dispatch, page: number, perPage: number) => {
   axios
-    .get(`${journalUrl}/journal?page=${page}&perPage=${perPage}`, {
+    .get(`${apiUrl}/journal?page=${page}&perPage=${perPage}`, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },
@@ -30,7 +30,7 @@ const fetchJournals = (dispatch: Dispatch, page: number, perPage: number) => {
 };
 const fetchAddJournal = (data: FormData, navigate: NavigateFunction) => {
   axios
-    .post(`${journalUrl}/journal`, data, {
+    .post(`${apiUrl}/journal`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${getAccessToken()}`,
@@ -46,7 +46,7 @@ const fetchAddJournal = (data: FormData, navigate: NavigateFunction) => {
 
 const fetchJournalById = async (id: string | undefined) => {
   try {
-    const res = await axios.get(`${journalUrl}/journal/${id}`, {
+    const res = await axios.get(`${apiUrl}/journal/${id}`, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },
@@ -63,7 +63,7 @@ const fetchUpdateJournal = async (
   navigate: NavigateFunction
 ) => {
   try {
-    await axios.put(`${journalUrl}/journal/${id}`, data, {
+    await axios.put(`${apiUrl}/journal/${id}`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${getAccessToken()}`,
@@ -77,7 +77,7 @@ const fetchUpdateJournal = async (
 
 const fetchDeleteJournal = async (id: string | undefined) => {
   try {
-    await axios.delete(`${journalUrl}/journal/${id}`, {
+    await axios.delete(`${apiUrl}/journal/${id}`, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },
