@@ -57,9 +57,9 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="main-app-wrapper">
+    <div>
       <Header user={user} onLogout={handleLogout} />
-      <div className="content-wrapper">
+      <div>
         <Outlet />
       </div>
       <Footer />

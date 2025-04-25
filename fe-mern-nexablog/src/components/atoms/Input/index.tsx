@@ -4,7 +4,7 @@ type InputProps = {
 
 const Input = ({ name, ...rest }: InputProps) => {
   return (
-    <div className="input-wrapper">
+    <div>
       <input name={name} {...rest} />
     </div>
   );

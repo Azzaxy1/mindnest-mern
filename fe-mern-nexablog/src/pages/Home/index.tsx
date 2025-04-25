@@ -4,12 +4,10 @@ import { useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Swall from "sweetalert2";
-
-import { BlogItem, Button, Gap } from "../../components";
+import { BlogItem } from "../../components";
 import { fetchBlogs, fetchDeleteBlog } from "../../services/blogService";
 import { IHomeState } from "../../types/homeTypes";
 import { updatedPage } from "../../config";
-import "./home.scss";
 import { TbMoodEmptyFilled } from "react-icons/tb";
 
 const Home = () => {
@@ -54,6 +52,8 @@ const Home = () => {
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Hapus",
       cancelButtonText: "Batal",
+      background: "#1f2937",
+      color: "#fff",
     }).then((result) => {
       if (result.isConfirmed) {
         fetchDeleteBlog(id)
@@ -63,6 +63,8 @@ const Home = () => {
               text: "Blog berhasil dihapus",
               icon: "success",
               confirmButtonText: "Oke",
+              background: "#1f2937",
+              color: "#fff",
             });
             fetchBlogs(dispatch, page.currentPage, perPage);
           })
@@ -73,6 +75,8 @@ const Home = () => {
               text: "Blog gagal dihapus",
               icon: "error",
               confirmButtonText: "Oke",
+              background: "#1f2937",
+              color: "#fff",
             });
           });
       }
@@ -80,41 +84,76 @@ const Home = () => {
   };
 
   return (
-    <div className="home-page-wrapper">
-      <div className="create-wrapper">
-        <Link className="link" to="/create-blog">
-          <Button title="Create Blog" iconPosition="top">
-            <FaPlus />
-          </Button>
+    <div className="min-h-screen bg-gray-900 text-white py-8 px-4 sm:px-6 lg:px-8">
+      {/* Create Blog Button */}
+      <div className="flex justify-end mb-8">
+        <Link
+          to="/create-blog"
+          className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+        >
+          <FaPlus className="mr-2" />
+          Create Blog
         </Link>
       </div>
-      <Gap height={20} />
-      <div className="content-wrapper">
+
+      {/* Blog Content */}
+      <div className="mb-12">
         {dataBlogs.length === 0 ? (
-          <div className="empty-data-wrapper">
-            <TbMoodEmptyFilled className="icon" />
-            <p className="empty-data-text">Data blog Kosong</p>
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <TbMoodEmptyFilled className="text-6xl text-gray-500 mb-4" />
+            <h3 className="text-2xl font-medium text-gray-300 mb-2">
+              Data Blog Kosong
+            </h3>
+            <p className="text-gray-500 max-w-md">
+              Tidak ada blog yang tersedia. Mulai dengan membuat blog baru!
+            </p>
           </div>
         ) : (
-          dataBlogs.map((blog, index) => (
-            <BlogItem key={index} blog={blog} onDelete={handleDeleteBlog} />
-          ))
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {dataBlogs.map((blog, index) => (
+              <BlogItem
+                key={index}
+                blog={blog}
+                onDelete={handleDeleteBlog}
+                className="bg-gray-800 rounded-xl border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:shadow-lg"
+              />
+            ))}
+          </div>
         )}
       </div>
-      <div className="pagination">
-        <Button title="Previous" iconPosition="top" onClick={handlePrevPage}>
-          <GrPrevious />
-        </Button>
-        <Gap width={20} />
-        <p className="text-page">
+
+      {/* Pagination */}
+      <div className="flex items-center justify-center space-x-6">
+        <button
+          onClick={handlePrevPage}
+          disabled={page.currentPage <= 1}
+          className={`flex items-center px-4 py-2 rounded-lg ${
+            page.currentPage <= 1
+              ? "bg-gray-800 text-gray-500 cursor-not-allowed"
+              : "bg-gray-800 text-white hover:bg-gray-700 border border-gray-700"
+          } transition-all`}
+        >
+          <GrPrevious className="mr-2" />
+          Previous
+        </button>
+
+        <span className="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
           {page?.currentPage ?? 0} / {page?.totalPage ?? 0}
-        </p>
-        <Gap width={20} />
-        <Button title="Next" iconPosition="bottom" onClick={handleNextPage}>
-          <GrNext />
-        </Button>
+        </span>
+
+        <button
+          onClick={handleNextPage}
+          disabled={page.currentPage >= page.totalPage}
+          className={`flex items-center px-4 py-2 rounded-lg ${
+            page.currentPage >= page.totalPage
+              ? "bg-gray-800 text-gray-500 cursor-not-allowed"
+              : "bg-gray-800 text-white hover:bg-gray-700 border border-gray-700"
+          } transition-all`}
+        >
+          Next
+          <GrNext className="ml-2" />
+        </button>
       </div>
-      <Gap height={20} />
     </div>
   );
 };
