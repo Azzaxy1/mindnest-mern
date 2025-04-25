@@ -1,19 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
-
-import { Button, Gap, Input, TextArea, Upload } from "../../components";
+import { Button, Input, TextArea, Upload } from "../../components";
 import {
   fetchAddBlog,
   fetchBlogById,
   fetchUpdateBlog,
 } from "../../services/blogService";
-import "./createBlog.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpdatedForm } from "../../config";
 import { CreateBlogState } from "../../types/createBlogTypes";
 import Swal from "sweetalert2";
 import { resetForm } from "../../config/redux/reducers/createBlogSlice";
+import { TbArrowBack } from "react-icons/tb";
 
 interface ICreateBLogState {
   createBlog: CreateBlogState;
@@ -59,7 +57,19 @@ const CreateBlog = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleSubmit = () => {
+    if (!title || !body) {
+      Swal.fire({
+        title: "Error!",
+        text: "Title and content cannot be empty",
+        icon: "error",
+        confirmButtonText: "OK",
+        background: "#1f2937",
+        color: "#fff",
+      });
+      return;
+    }
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("body", body);
@@ -86,36 +96,85 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="create-blog">
-      <div className="back-btn">
-        <Button iconPosition="top" title="Kembali" onClick={() => navigate(-1)}>
-          <IoChevronBackCircleOutline className="icon" />
-        </Button>
+    <div className="min-h-screen bg-gray-900 text-white py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center text-gray-400 cursor-pointer hover:text-white transition-colors duration-300"
+          >
+            <TbArrowBack className="mr-2 text-xl" />
+            <span>Back</span>
+          </button>
+          <h1 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+            {isUpdate ? "Update" : "Create New"} Blog Post
+          </h1>
+          <div className="w-8"></div> {/* Spacer for alignment */}
+        </div>
+
+        {/* Form */}
+        <div className="bg-gray-800 rounded-xl p-6 md:p-8 border border-gray-700 shadow-lg">
+          {/* Title Input */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Title
+              <span className="text-xs text-gray-500 block mt-1">
+                Write your blog title
+              </span>
+            </label>
+            <Input
+              value={title}
+              onChange={(e) =>
+                dispatch(setUpdatedForm({ ...form, title: e.target.value }))
+              }
+              name="blog-title"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white"
+              placeholder="Enter blog title"
+            />
+          </div>
+
+          {/* Image Upload */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Featured Image
+              <span className="text-xs text-gray-500 block mt-1">
+                Upload or change the image
+              </span>
+            </label>
+            <Upload
+              onChange={handleFileChange}
+              image={previewUrl}
+              className="border-2 border-dashed border-gray-600 hover:border-blue-500 rounded-lg transition-all duration-300"
+            />
+          </div>
+
+          {/* Content Textarea */}
+          <div className="mb-8">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Content
+              <span className="text-xs text-gray-500 block mt-1">
+                Write your blog content
+              </span>
+            </label>
+            <TextArea
+              value={body}
+              onChange={(e) =>
+                dispatch(setUpdatedForm({ ...form, body: e.target.value }))
+              }
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white min-h-[200px]"
+              placeholder="Write your blog content here..."
+            />
+          </div>
+
+          {/* Submit Button */}
+          <Button
+            title={isUpdate ? "Update Post" : "Publish Post"}
+            onClick={handleSubmit}
+            className="w-full py-3 px-4 bg-gradient-to-r cursor-pointer from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+          />
+        </div>
       </div>
-      <p className="title">{isUpdate ? "Update" : "Create New"} Blog Post</p>
-      <label htmlFor="create-blog">
-        <p className="label">Title</p>
-        <span className="desc">Write your blog title</span>
-      </label>
-      <Input
-        value={title}
-        onChange={(e) =>
-          dispatch(setUpdatedForm({ ...form, title: e.target.value }))
-        }
-        name="create-blog"
-      />
-      <Upload onChange={handleFileChange} image={previewUrl} />
-      <TextArea
-        value={body}
-        onChange={(e) =>
-          dispatch(setUpdatedForm({ ...form, body: e.target.value }))
-        }
-      />
-      <Gap height={20} />
-      <div className="btn-create">
-        <Button title={isUpdate ? "Update" : "Save"} onClick={handleClick} />
-      </div>
-      <Gap height={20} />
     </div>
   );
 };
