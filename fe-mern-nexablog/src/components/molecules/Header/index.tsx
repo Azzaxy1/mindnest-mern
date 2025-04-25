@@ -28,7 +28,7 @@ const Header = ({ user, onLogout }: HeaderProps) => {
 
               <button
                 onClick={onLogout}
-                className="flex items-center space-x-1 bg-gray-800 hover:bg-gray-700 px-3 py-2 rounded-lg border border-gray-700 transition-all duration-200 group"
+                className="flex items-center space-x-1 cursor-pointer bg-gray-800 hover:bg-gray-700 px-3 py-2 rounded-lg border border-gray-700 transition-all duration-200 group"
               >
                 <MdLogout className="text-gray-400 group-hover:text-white" />
                 <span className="text-gray-300 group-hover:text-white">
