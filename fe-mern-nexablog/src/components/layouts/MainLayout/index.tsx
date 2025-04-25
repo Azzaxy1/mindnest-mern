@@ -1,6 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { Footer, Header } from "../../molecules";
-import "./main-layout.scss";
 import { useEffect, useState } from "react";
 import { fetchUserLogged } from "../../../services/authService";
 import Swal from "sweetalert2";

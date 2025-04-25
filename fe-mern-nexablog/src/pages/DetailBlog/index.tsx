@@ -22,7 +22,7 @@ const DetailBlog = () => {
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center text-gray-400 cursor-pointer hover:text-white mb-8 transition-colors duration-300"
+          className="flex items-center text-gray-400 hover:text-white mb-8 transition-colors duration-300"
         >
           <TbArrowBack className="mr-2" />
           <span>Kembali</span>
