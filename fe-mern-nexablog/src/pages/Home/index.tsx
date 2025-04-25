@@ -92,7 +92,7 @@ const Home = () => {
           className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
         >
           <FaPlus className="mr-2" />
-          Create Blog
+          Create Your Journal
         </Link>
       </div>
 
@@ -102,10 +102,10 @@ const Home = () => {
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <TbMoodEmptyFilled className="text-6xl text-gray-500 mb-4" />
             <h3 className="text-2xl font-medium text-gray-300 mb-2">
-              Data Blog Kosong
+              Your journal is still empty.
             </h3>
             <p className="text-gray-500 max-w-md">
-              Tidak ada blog yang tersedia. Mulai dengan membuat blog baru!
+              Start reflecting on your thoughts by creating your first entry.
             </p>
           </div>
         ) : (
