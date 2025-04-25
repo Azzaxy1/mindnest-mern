@@ -41,7 +41,7 @@ const BlogItem = ({ blog, onDelete, className = "" }: BlogProps) => {
             </Link>
             <button
               onClick={() => onDelete(blog._id)}
-              className="p-2 bg-gray-800/80 hover:bg-red-600 rounded-full transition-all duration-300 transform hover:scale-110"
+              className="p-2 bg-gray-800/80 cursor-pointer hover:bg-red-600 rounded-full transition-all duration-300 transform hover:scale-110"
               title="Delete"
             >
               <RiDeleteBin6Fill className="text-gray-300 hover:text-white" />
@@ -62,13 +62,13 @@ const BlogItem = ({ blog, onDelete, className = "" }: BlogProps) => {
           {blog.author.name} • {formatedDate(blog.createdAt)}
         </p>
 
-        <p className="text-gray-300 mb-6 line-clamp-3">
+        <p className="text-gray-300  line-clamp-3 h-[100px] mb-2">
           {truncateText(blog.body, 150)}
         </p>
 
         <Link
           to={`detail-blog/${blog._id}`}
-          className="inline-flex items-center px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-all duration-300 group/view"
+          className="inline-flex w-full justify-center items-center px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-all duration-300 group/view"
         >
           <span>View Detail</span>
           <TbListDetails className="ml-2 transition-transform duration-300 group-hover/view:translate-x-1" />

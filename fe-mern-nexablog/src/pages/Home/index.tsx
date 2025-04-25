@@ -12,7 +12,7 @@ import { TbMoodEmptyFilled } from "react-icons/tb";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const perPage = 4;
+  const perPage = 6;
 
   const { dataBlogs, page } = useSelector((state: IHomeState) => state.home);
 
@@ -131,7 +131,7 @@ const Home = () => {
             page.currentPage <= 1
               ? "bg-gray-800 text-gray-500 cursor-not-allowed"
               : "bg-gray-800 text-white hover:bg-gray-700 border border-gray-700"
-          } transition-all`}
+          } transition-all cursor-pointer`}
         >
           <GrPrevious className="mr-2" />
           Previous
@@ -146,9 +146,9 @@ const Home = () => {
           disabled={page.currentPage >= page.totalPage}
           className={`flex items-center px-4 py-2 rounded-lg ${
             page.currentPage >= page.totalPage
-              ? "bg-gray-800 text-gray-500 cursor-not-allowed"
+              ? "bg-gray-800 text-gray-500  cursor-not-allowed"
               : "bg-gray-800 text-white hover:bg-gray-700 border border-gray-700"
-          } transition-all`}
+          } transition-all cursor-pointer`}
         >
           Next
           <GrNext className="ml-2" />
