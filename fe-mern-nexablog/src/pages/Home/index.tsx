@@ -91,7 +91,7 @@ const Home = () => {
       {/* Create journal Button */}
       <div className="flex justify-end mb-8">
         <Link
-          to="/create-journal"
+          to="/updated-journal"
           className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
         >
           <FaPlus className="mr-2" />

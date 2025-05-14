@@ -3,6 +3,6 @@ import Login from "./Login";
 import Register from "./Register";
 import Error from "./Error";
 import DetailJournal from "./DetailJournal";
-import CreateJournal from "./CreateJournal";
+import UpdatedJournal from "./UpdatedJournal";
 
-export { Home, Login, Register, Error, DetailJournal, CreateJournal };
+export { Home, Login, Register, Error, DetailJournal, UpdatedJournal };

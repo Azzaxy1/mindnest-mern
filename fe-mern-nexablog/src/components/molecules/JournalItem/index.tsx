@@ -33,7 +33,7 @@ const JournalItem = ({ journal, onDelete, className = "" }: JournalProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
           <div className="flex space-x-3">
             <Link
-              to={`create-journal/${journal._id}`}
+              to={`updated-journal/${journal._id}`}
               className="p-2 bg-gray-800/80 hover:bg-blue-600 rounded-full transition-all duration-300 transform hover:scale-110"
               title="Edit"
             >

@@ -1,7 +1,12 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Error, Home, Login, Register } from "./pages";
-import CreateJournal from "./pages/CreateJournal";
-import DetailJournal from "./pages/DetailJournal";
+import {
+  DetailJournal,
+  Error,
+  Home,
+  Login,
+  Register,
+  UpdatedJournal,
+} from "./pages";
 import { MainLayout } from "./components";
 
 const App = () => {
@@ -11,7 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index Component={Home} />
-            <Route path="/create-journal/:id?" Component={CreateJournal} />
+            <Route path="/updated-journal/:id?" Component={UpdatedJournal} />
             <Route path="/detail-journal/:id" Component={DetailJournal} />
           </Route>
           <Route path="/login" Component={Login} />
