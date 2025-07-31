@@ -28,6 +28,36 @@
 - Edit or delete past entries anytime.
 - All entries are securely stored and accessible only to you.
 
+## 💻 Features Page
+
+### - Login Page with Auth Google
+
+<img src="./assets/login.png" alt="Login Page" width="800"/>
+
+### - Login Register
+
+<img src="./assets/register.png" alt="Register Page" width="800"/>
+
+### - Home Page
+
+<img src="./assets/home.png" alt="Home Page" width="800"/>
+
+### - Create Journal
+
+<img src="./assets/create.png" alt="Create Journal Page" width="800"/>
+
+### - Detail Journal
+
+<img src="./assets/detail.png" alt="Detail Page" width="800"/>
+
+### - Edit Journal
+
+<img src="./assets/edit.png" alt="Edit Page" width="800"/>
+
+### - Delete Journal
+
+<img src="./assets/delete.png" alt="Delete Page" width="800"/>
+
 ## 🤝 Contributing
 
 Want to contribute to MindNest?  
