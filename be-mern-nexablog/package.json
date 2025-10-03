@@ -7,10 +7,9 @@
   "author": "Azzaxy <abdurrohmanazis@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node src/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "serve": "node dist/server.js"
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
