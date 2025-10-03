@@ -54,16 +54,9 @@ app.use(multer({ storage, fileFilter }).single("image"));
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://mindnest-mern.vercel.app"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Cross-Origin-Opener-Policy",
-      "same-origin",
-      "Referrer-Policy",
-      "no-referrer-when-downgrade",
-    ],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 // app.use((req, res, next) => {
